@@ -1,4 +1,4 @@
-package com.diomun.learn.androidevusingjava.activity;
+package com.diomun.learn.androidevusingjava.ui.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
