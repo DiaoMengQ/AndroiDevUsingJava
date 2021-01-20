@@ -2,8 +2,8 @@ package com.diomun.learn.androidevusingjava.ui.base;
 
 import android.app.AlertDialog;
 import android.content.Intent;
-import android.os.Bundle;
 import android.os.Message;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
@@ -12,7 +12,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.badoo.mobile.util.WeakHandler;
 import com.diomun.learn.androidevusingjava.R;
-import com.diomun.learn.androidevusingjava.util.LogUtils;
 
 /**
  * Author: DiaoMengQi
@@ -36,23 +35,10 @@ public abstract class BaseActivity extends AppCompatActivity {
         return mHandler;
     }
 
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        LogUtils.d(TAG, String.format("%s onCreate", TAG));
-        mContext = this;
-        initLoading();
-
-        setContentView(initLayout());
-        initView();
-        initData();
-    }
-
     @Override
     protected void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
-        LogUtils.d(TAG, String.format("%s onNewIntent", TAG));
+        Log.d(TAG, String.format("%s onNewIntent", TAG));
     }
 
     /**
@@ -86,11 +72,6 @@ public abstract class BaseActivity extends AppCompatActivity {
             mDialogLoading.dismiss();
         }
     }
-
-    /**
-     * 设置根布局
-     */
-    public abstract int initLayout();
 
     /**
      * 初始化布局
