@@ -5,4 +5,3 @@
 ## 依赖库
 * [RxJava](https://github.com/ReactiveX/RxJava)
 * [Retrofit](https://github.com/square/retrofit)
-* [Butterknife](https://github.com/JakeWharton/butterknife)
