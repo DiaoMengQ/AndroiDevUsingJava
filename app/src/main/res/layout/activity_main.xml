@@ -6,12 +6,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.activity.MainActivity"
-    android:id="@+id/mainActivity"
-    >
-
+    android:id="@+id/mainActivity">
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_marginTop="16dp"
         android:orientation="vertical"
@@ -20,24 +18,31 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <Button
-            android:id="@+id/btn_toListView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:width="20sp"
-            android:text="打开listVIEW"
-            android:padding="10sp"
-            tools:layout_conversion_absoluteHeight="55dp"
-            tools:layout_conversion_absoluteWidth="88dp" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:padding="32sp">
 
-        <Button
-            android:id="@+id/btn_test"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Button"
-            android:padding="10sp"
-            tools:layout_conversion_absoluteHeight="48dp"
-            tools:layout_conversion_absoluteWidth="88dp" />
+            <Button
+                android:id="@+id/btn_toListView"
+                android:layout_width="@dimen/width4btn"
+                android:layout_height="@dimen/height4btn"
+                android:padding="@dimen/padding4button"
+                android:text="打开listVIEW" />
+
+            <Space
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
+
+            <Button
+                android:id="@+id/btn_test"
+                android:layout_width="@dimen/width4btn"
+                android:layout_height="@dimen/height4btn"
+                android:padding="@dimen/padding4button"
+                android:text="Button" />
+        </LinearLayout>
 
     </LinearLayout>
 

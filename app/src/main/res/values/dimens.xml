@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="padding4button">10sp</dimen>
+    <dimen name="width4btn">150dp</dimen>
+    <dimen name="height4btn">50dp</dimen>
+</resources>
