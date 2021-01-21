@@ -1,5 +1,6 @@
-package com.diomun.learn.androidevusingjava.ui.base;
+package com.diomun.learn.androidevusingjava.base;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Message;
@@ -13,7 +14,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.badoo.mobile.util.WeakHandler;
 import com.diomun.learn.androidevusingjava.R;
 
+import java.util.Objects;
+
 /**
+ * Activity 基本类，设定通用方法
+ *
  * Author: DiaoMengQi
  * Email: dmq1212@qq.com
  * created on 2021/1/19
@@ -21,6 +26,7 @@ import com.diomun.learn.androidevusingjava.R;
 public abstract class BaseActivity extends AppCompatActivity {
     protected final String TAG = getClass().getSimpleName();
     protected BaseActivity mContext;
+    protected View mView;
     private AlertDialog mDialogLoading;
 
     protected WeakHandler mHandler = new WeakHandler(msg -> {
@@ -56,9 +62,9 @@ public abstract class BaseActivity extends AppCompatActivity {
     public void showLoading() {
         if(mDialogLoading != null && !mDialogLoading.isShowing()) {
             mDialogLoading.show();
-            View view = LayoutInflater.from(mContext).inflate(R.layout.dialog_progress, null);
+            @SuppressLint("InflateParams") View view = LayoutInflater.from(mContext).inflate(R.layout.dialog_progress, null);
             mDialogLoading.setContentView(view);
-            mDialogLoading.getWindow().setLayout(WindowManager.LayoutParams.WRAP_CONTENT, WindowManager.LayoutParams.WRAP_CONTENT);
+            Objects.requireNonNull(mDialogLoading.getWindow()).setLayout(WindowManager.LayoutParams.WRAP_CONTENT, WindowManager.LayoutParams.WRAP_CONTENT);
             mDialogLoading.getWindow().getDecorView().setBackgroundColor(0x00000000);
             mDialogLoading.getWindow().getDecorView().setPadding(0, 0, 0, 0);
         }
@@ -82,6 +88,5 @@ public abstract class BaseActivity extends AppCompatActivity {
      * 设置数据
      */
     public abstract void initData();
-
 
 }
