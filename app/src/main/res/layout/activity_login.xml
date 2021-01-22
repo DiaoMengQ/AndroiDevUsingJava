@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffffff"
+    android:orientation="vertical"
+    android:padding="@dimen/padding_page">
+
+    <!--   顶部标识   -->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.3">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:orientation="vertical">
+
+
+            <!--  项目名   -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/app_name"
+                android:textColor="#D8D8D8"
+                android:textSize="32sp" />
+
+            <!--  登录文本  -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/login"
+                android:textColor="#000000"
+                android:textSize="30sp" />
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+    <!--   文字框和登录按钮   -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="10dp"
+        android:layout_weight="0.4"
+        android:orientation="vertical">
+
+        <!--    登录名框    -->
+        <EditText
+            android:id="@+id/et_username"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/et_top"
+            android:hint="@string/hint_username"
+            android:importantForAutofill="no"
+            android:padding="10dp"
+            android:textSize="16sp" />
+
+        <!--    密码框    -->
+        <EditText
+            android:id="@+id/et_password"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/et_bottom"
+            android:hint="@string/hint_password"
+            android:importantForAutofill="no"
+            android:inputType="textPassword"
+            android:padding="10dp"
+            android:textSize="16sp" />
+
+        <!--    登录按钮    -->
+        <Button
+            android:id="@+id/btn_login"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginLeft="32dp"
+            android:layout_marginTop="25dp"
+            android:layout_marginRight="32dp"
+            android:background="@drawable/btn_ellipse"
+            android:elevation="0dp"
+            android:text="@string/login"
+            android:textColor="@color/colorAccent"
+            android:textSize="16sp" />
+    </LinearLayout>
+
+    <!--   底部信息   -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.3"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/forgot_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/forgot_text"
+            android:textColor="@color/colorAccent"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/register_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="16dp"
+            android:text="@string/create_text"
+            android:textColor="@color/colorAccent"
+            android:textSize="16sp" />
+    </LinearLayout>
+</LinearLayout>

@@ -3,12 +3,15 @@ package com.diomun.learn.androidevusingjava.base;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Intent;
+import android.os.Bundle;
 import android.os.Message;
+import android.os.PersistableBundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.badoo.mobile.util.WeakHandler;
