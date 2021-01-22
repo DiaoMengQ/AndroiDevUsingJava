@@ -116,5 +116,6 @@
             android:text="@string/create_text"
             android:textColor="@color/colorAccent"
             android:textSize="16sp" />
+        
     </LinearLayout>
 </LinearLayout>
