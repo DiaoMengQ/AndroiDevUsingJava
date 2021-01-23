@@ -1,8 +1,5 @@
 package com.diomun.learn.androidevusingjava.ui.activity;
 
-import android.os.Bundle;
-import android.util.Log;
-
 import com.diomun.learn.androidevusingjava.R;
 import com.diomun.learn.androidevusingjava.base.BaseActivity;
 
@@ -12,10 +9,8 @@ import com.diomun.learn.androidevusingjava.base.BaseActivity;
  */
 public class LoginActivity extends BaseActivity {
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
-        Log.d(TAG, "onCreate: ");
+    public int initLayout() {
+        return R.layout.activity_login;
     }
 
     @Override

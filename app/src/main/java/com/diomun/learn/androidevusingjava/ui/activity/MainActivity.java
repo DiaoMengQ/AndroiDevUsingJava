@@ -15,15 +15,8 @@ import com.diomun.learn.androidevusingjava.base.OnMultiClickListener;
  */
 public class MainActivity extends BaseActivity {
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        Log.d(TAG, String.format("%s onCreate", TAG));
-        mContext = this;
-        mView = mContext.findViewById(R.id.mainActivity);
-        setContentView(R.layout.activity_main);
-
-        initView();
-        initData();
+    public int initLayout() {
+        return R.id.mainActivity;
     }
 
     OnMultiClickListener multiClickListener = new OnMultiClickListener() {

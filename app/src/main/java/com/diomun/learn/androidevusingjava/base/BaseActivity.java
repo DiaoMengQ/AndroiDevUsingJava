@@ -21,7 +21,7 @@ import java.util.Objects;
 
 /**
  * Activity 基本类，设定通用方法
- *
+ * <p>
  * Author: DiaoMengQi
  * Email: dmq1212@qq.com
  * created on 2021/1/19
@@ -31,15 +31,19 @@ public abstract class BaseActivity extends AppCompatActivity {
     protected BaseActivity mContext;
     protected View mView;
     private AlertDialog mDialogLoading;
+    private int layoutId = -1;
 
     protected WeakHandler mHandler = new WeakHandler(msg -> {
         handlerMsg(msg);
         return false;
     });
+
     /**
      * 处理handler消息
      */
-    public void handlerMsg(Message msg) {}
+    public void handlerMsg(Message msg) {
+    }
+
     public WeakHandler getHandler() {
         return mHandler;
     }
@@ -63,7 +67,7 @@ public abstract class BaseActivity extends AppCompatActivity {
      * 显示转圈圈
      */
     public void showLoading() {
-        if(mDialogLoading != null && !mDialogLoading.isShowing()) {
+        if (mDialogLoading != null && !mDialogLoading.isShowing()) {
             mDialogLoading.show();
             @SuppressLint("InflateParams") View view = LayoutInflater.from(mContext).inflate(R.layout.dialog_progress, null);
             mDialogLoading.setContentView(view);
@@ -74,13 +78,19 @@ public abstract class BaseActivity extends AppCompatActivity {
     }
 
     /**
-     *隐藏转圈圈
+     * 隐藏转圈圈
      */
     public void hideLoading() {
-        if(mDialogLoading != null && mDialogLoading.isShowing()) {
+        if (mDialogLoading != null && mDialogLoading.isShowing()) {
             mDialogLoading.dismiss();
         }
     }
+
+    /**
+     * 设置根布局
+     * @return int layout的唯一识别号(R.layout.XXX)
+     */
+    public abstract int initLayout();
 
     /**
      * 初始化布局
@@ -92,4 +102,52 @@ public abstract class BaseActivity extends AppCompatActivity {
      */
     public abstract void initData();
 
+    @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        Log.d(TAG, String.format("%s onCreate", TAG));
+        mContext = this;
+        initLoading();
+
+        layoutId = initLayout();
+        setContentView(layoutId);
+        initView();
+        initData();
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        Log.d(TAG, "onRestart: ");
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        Log.d(TAG, "onStart: ");
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Log.d(TAG, "onResume: ");
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        Log.d(TAG, "onPause: ");
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        Log.d(TAG, "onStop: ");
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Log.d(TAG, "onDestroy: ");
+    }
 }
