@@ -56,7 +56,6 @@ public class LoginActivity extends BaseActivity {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.btn_login:
-                Toast.makeText(mContext, "登录", Toast.LENGTH_SHORT).show();
                 Log.d(TAG, "onViewClicked: login");
                 break;
             case R.id.tv_forgot:
