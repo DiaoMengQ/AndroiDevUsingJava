@@ -1,5 +1,7 @@
 package com.diomun.learn.androidevusingjava.database.model;
 
+import androidx.annotation.NonNull;
+
 /**
  * @author DIOMUN dmq1212@qq.com
  * @date created on 2021/1/23
@@ -38,6 +40,7 @@ public class User {
         mPhone = phone;
     }
 
+    @NonNull
     @Override
     public String toString() {
         return "User{" + getName() + " " + getPassword() + " " + getPhone() + "}";

@@ -1,7 +1,6 @@
 package com.diomun.learn.androidevusingjava.base;
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -19,11 +18,9 @@ import com.diomun.learn.androidevusingjava.R;
 
 import java.util.Objects;
 
-import butterknife.ButterKnife;
-
 /**
  * Activity 基本类，设定通用方法
- * <p>
+ *
  * Author: DiaoMengQi
  * Email: dmq1212@qq.com
  * created on 2021/1/19
@@ -111,8 +108,6 @@ public abstract class BaseActivity extends AppCompatActivity {
         mContext = this;
         layoutRes = initLayout();
         setContentView(layoutRes);
-        mView = View.inflate(mContext,R.layout.activity_login,null);
-        ButterKnife.bind(mContext,mView);
 
         initView();
         initData();

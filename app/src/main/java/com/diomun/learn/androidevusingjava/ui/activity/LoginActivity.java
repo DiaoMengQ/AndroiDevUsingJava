@@ -44,18 +44,12 @@ public class LoginActivity extends BaseActivity {
 
     @Override
     public void initView() {
+        ButterKnife.bind(this);
     }
 
     @Override
     public void initData() {
 
-    }
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        // TODO: add setContentView(...) invocation
-        ButterKnife.bind(this);
     }
 
     @OnClick({R.id.btn_login, R.id.tv_forgot, R.id.tv_register})
