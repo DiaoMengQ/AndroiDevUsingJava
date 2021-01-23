@@ -1,11 +1,11 @@
 package com.diomun.learn.androidevusingjava.base;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Message;
-import android.os.PersistableBundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,6 +19,8 @@ import com.diomun.learn.androidevusingjava.R;
 
 import java.util.Objects;
 
+import butterknife.ButterKnife;
+
 /**
  * Activity 基本类，设定通用方法
  * <p>
@@ -31,7 +33,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     protected BaseActivity mContext;
     protected View mView;
     private AlertDialog mDialogLoading;
-    private int layoutId = -1;
+    private int layoutRes = -1;
 
     protected WeakHandler mHandler = new WeakHandler(msg -> {
         handlerMsg(msg);
@@ -107,10 +109,11 @@ public abstract class BaseActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         Log.d(TAG, String.format("%s onCreate", TAG));
         mContext = this;
-        initLoading();
+        layoutRes = initLayout();
+        setContentView(layoutRes);
+        mView = View.inflate(mContext,R.layout.activity_login,null);
+        ButterKnife.bind(mContext,mView);
 
-        layoutId = initLayout();
-        setContentView(layoutId);
         initView();
         initData();
     }

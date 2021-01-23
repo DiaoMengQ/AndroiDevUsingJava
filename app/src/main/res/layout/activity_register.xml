@@ -114,7 +114,7 @@
             android:textSize="16sp" />
 
         <TextView
-            android:id="@+id/register_tv"
+            android:id="@+id/tv_register"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
