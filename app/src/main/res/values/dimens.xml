@@ -2,6 +2,6 @@
 <resources>
     <dimen name="padding4button">16sp</dimen>
     <dimen name="width4btn">150dp</dimen>
-    <dimen name="height4btn">50dp</dimen>
+    <dimen name="height4btn">70dp</dimen>
     <dimen name="padding_page">16sp</dimen>
 </resources>

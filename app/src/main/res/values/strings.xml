@@ -6,5 +6,6 @@
     <string name="forgot_text">忘记密码?</string>
     <string name="create_text">创建账户</string>
     <string name="help_info">现在，您可以输入您的电话号码。注意：请确保您的号码能正常使用，该号码可作为您找回密码的凭证。</string>
+    <string name="login_text">好久不见 ヾ(´▽｀)o</string>
 
 </resources>

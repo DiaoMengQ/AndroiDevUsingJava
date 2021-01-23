@@ -11,7 +11,7 @@ import com.diomun.learn.androidevusingjava.base.BaseActivity;
 import com.diomun.learn.androidevusingjava.base.OnMultiClickListener;
 
 /**
- * @author DiaoMengQ
+ * @author DIOMUN
  */
 public class MainActivity extends BaseActivity {
     @Override

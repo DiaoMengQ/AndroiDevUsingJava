@@ -1,45 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#ffffff"
     android:orientation="vertical"
+    tools:context=".ui.activity.LoginActivity"
     android:padding="@dimen/padding_page">
 
     <!--   顶部标识   -->
-    <RelativeLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="0.3">
+        android:layout_weight="0.3"
+        android:id="@+id/text_top">
 
-        <LinearLayout
-            android:layout_width="match_parent"
+        <!--  项目名   -->
+        <TextView
+            android:id="@+id/tv_proj"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:orientation="vertical">
+            android:layout_marginTop="50dp"
+            android:text="@string/app_name"
+            android:textColor="#D8D8D8"
+            android:textSize="32sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:layout_conversion_absoluteHeight="43dp"
+            tools:layout_conversion_absoluteWidth="96dp" />
 
-
-            <!--  项目名   -->
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="@string/app_name"
-                android:textColor="#D8D8D8"
-                android:textSize="32sp" />
-
-            <!--  登录文本  -->
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="@string/login"
-                android:textColor="#000000"
-                android:textSize="30sp" />
-
-        </LinearLayout>
-
-    </RelativeLayout>
+        <!--  登录文本  -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@string/login_text"
+            android:textColor="#000000"
+            android:textSize="30sp"
+            app:layout_constraintEnd_toEndOf="@+id/tv_proj"
+            app:layout_constraintStart_toStartOf="@+id/tv_proj"
+            app:layout_constraintTop_toBottomOf="@+id/tv_proj"
+            tools:layout_conversion_absoluteHeight="41dp"
+            tools:layout_conversion_absoluteWidth="60dp" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <!--   文字框和登录按钮   -->
     <LinearLayout
@@ -59,6 +64,7 @@
             android:background="@drawable/et_top"
             android:hint="@string/hint_username"
             android:importantForAutofill="no"
+            android:inputType="text"
             android:padding="10dp"
             android:textSize="16sp" />
 
@@ -116,6 +122,6 @@
             android:text="@string/create_text"
             android:textColor="@color/colorAccent"
             android:textSize="16sp" />
-        
+
     </LinearLayout>
 </LinearLayout>
