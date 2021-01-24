@@ -1,12 +1,12 @@
-package com.diomun.learn.androidevusingjava.database.manager;
+package com.diomun.learn.javademo.database.manager;
 
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
-import com.diomun.learn.androidevusingjava.database.UserDBHelper;
-import com.diomun.learn.androidevusingjava.database.model.User;
+import com.diomun.learn.javademo.database.UserDBHelper;
+import com.diomun.learn.javademo.database.model.User;
 
 /**
  * @author DIOMUN dmq1212@qq.com

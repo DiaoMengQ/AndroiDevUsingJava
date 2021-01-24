@@ -1,10 +1,10 @@
-package com.diomun.learn.androidevusingjava.database;
+package com.diomun.learn.javademo.database;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import com.diomun.learn.androidevusingjava.database.manager.GlobeManager;
+import com.diomun.learn.javademo.database.manager.GlobeManager;
 
 /**
  * @author DIOMUN dmq1212@qq.com

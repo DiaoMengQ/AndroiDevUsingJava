@@ -1,4 +1,4 @@
-package com.diomun.learn.androidevusingjava;
+package com.diomun.learn.javademo;
 
 import org.junit.Test;
 

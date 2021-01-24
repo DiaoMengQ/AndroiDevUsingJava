@@ -1,11 +1,11 @@
-package com.diomun.learn.androidevusingjava.ui.activity;
+package com.diomun.learn.javademo.ui.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.diomun.learn.androidevusingjava.R;
+import com.diomun.learn.javademo.R;
 
 import static android.os.SystemClock.sleep;
 

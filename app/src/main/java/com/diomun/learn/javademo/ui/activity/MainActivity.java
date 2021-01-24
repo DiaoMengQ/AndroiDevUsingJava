@@ -1,14 +1,12 @@
-package com.diomun.learn.androidevusingjava.ui.activity;
+package com.diomun.learn.javademo.ui.activity;
 
-import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
-import com.diomun.learn.androidevusingjava.R;
-import com.diomun.learn.androidevusingjava.base.BaseActivity;
-import com.diomun.learn.androidevusingjava.base.OnMultiClickListener;
+import com.diomun.learn.javademo.R;
+import com.diomun.learn.javademo.base.BaseActivity;
+import com.diomun.learn.javademo.base.OnMultiClickListener;
 
 /**
  * @author DIOMUN

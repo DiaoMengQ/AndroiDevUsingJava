@@ -1,4 +1,4 @@
-package com.diomun.learn.androidevusingjava.database.model;
+package com.diomun.learn.javademo.database.model;
 
 import androidx.annotation.NonNull;
 

@@ -1,4 +1,4 @@
-package com.diomun.learn.androidevusingjava.database.manager;
+package com.diomun.learn.javademo.database.manager;
 
 /**
  * @author DIOMUN dmq1212@qq.com

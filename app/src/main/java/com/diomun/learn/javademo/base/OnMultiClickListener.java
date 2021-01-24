@@ -1,4 +1,4 @@
-package com.diomun.learn.androidevusingjava.base;
+package com.diomun.learn.javademo.base;
 
 import android.view.View;
 

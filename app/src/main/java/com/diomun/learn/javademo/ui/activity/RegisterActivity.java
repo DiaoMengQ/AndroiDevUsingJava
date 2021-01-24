@@ -1,12 +1,7 @@
-package com.diomun.learn.androidevusingjava.ui.activity;
+package com.diomun.learn.javademo.ui.activity;
 
-import android.os.Bundle;
-import android.os.PersistableBundle;
-
-import androidx.annotation.Nullable;
-
-import com.diomun.learn.androidevusingjava.R;
-import com.diomun.learn.androidevusingjava.base.BaseActivity;
+import com.diomun.learn.javademo.R;
+import com.diomun.learn.javademo.base.BaseActivity;
 
 /**
  * @author DIOMUN dmq1212@qq.com

@@ -1,4 +1,4 @@
-package com.diomun.learn.androidevusingjava;
+package com.diomun.learn.javademo;
 
 import android.content.Context;
 
@@ -23,6 +23,6 @@ public class ExampleInstrumentedTest {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
 
-        assertEquals("com.diomun.learn.androidevusingjava", appContext.getPackageName());
+        assertEquals("com.diomun.learn.javademo", appContext.getPackageName());
     }
 }

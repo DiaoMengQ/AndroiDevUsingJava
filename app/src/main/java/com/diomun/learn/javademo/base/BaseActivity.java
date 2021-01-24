@@ -1,4 +1,4 @@
-package com.diomun.learn.androidevusingjava.base;
+package com.diomun.learn.javademo.base;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
@@ -14,7 +14,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.badoo.mobile.util.WeakHandler;
-import com.diomun.learn.androidevusingjava.R;
+import com.diomun.learn.javademo.R;
 
 import java.util.Objects;
 
