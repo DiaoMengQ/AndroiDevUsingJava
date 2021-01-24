@@ -14,7 +14,7 @@ import com.diomun.learn.javademo.base.OnMultiClickListener;
 public class MainActivity extends BaseActivity {
     @Override
     public int initLayout() {
-        return R.id.mainActivity;
+        return R.layout.activity_main;
     }
 
     OnMultiClickListener multiClickListener = new OnMultiClickListener() {
