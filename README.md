@@ -6,3 +6,4 @@
 * [RxJava](https://github.com/ReactiveX/RxJava)
 * [Retrofit](https://github.com/square/retrofit)
 * [Butter Knife](https://github.com/JakeWharton/butterknife)
+* [Android Image Cropper](https://github.com/ArthurHub/Android-Image-Cropper)

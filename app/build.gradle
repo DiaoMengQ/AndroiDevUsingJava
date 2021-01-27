@@ -46,4 +46,6 @@ dependencies {
     implementation 'io.reactivex.rxjava3:rxjava:3.0.9'
 
     annotationProcessor 'com.jakewharton:butterknife-compiler:10.2.3'
+
+    api 'com.theartofdev.edmodo:android-image-cropper:2.8.+'
 }
