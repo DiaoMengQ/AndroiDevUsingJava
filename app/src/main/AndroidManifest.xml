@@ -15,7 +15,8 @@
         android:theme="@style/style_user0"
         tools:ignore="AllowBackup,GoogleAppIndexingWarning">
         <!-- 主页-->
-        <activity android:name="com.diomun.learn.javademo.ui.activity.MainActivity">
+        <activity android:name="com.diomun.learn.javademo.ui.activity.MainActivity"
+            android:launchMode="singleTask">
             <!--<intent-filter>-->
             <!--    <action android:name="android.intent.action.MAIN" />-->
             <!--    <category android:name="android.intent.category.LAUNCHER" />-->
