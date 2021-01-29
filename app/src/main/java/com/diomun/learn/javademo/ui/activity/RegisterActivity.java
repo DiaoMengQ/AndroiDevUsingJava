@@ -108,11 +108,4 @@ public class RegisterActivity extends BaseActivity {
                 throw new IllegalStateException("Unexpected value: " + view.getId());
         }
     }
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        // TODO: add setContentView(...) invocation
-        ButterKnife.bind(this);
-    }
 }
