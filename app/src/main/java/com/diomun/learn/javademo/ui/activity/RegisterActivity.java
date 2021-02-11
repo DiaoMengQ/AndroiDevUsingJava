@@ -9,13 +9,14 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.diomun.learn.javademo.R;
 import com.diomun.learn.javademo.base.BaseActivity;
+import com.diomun.learn.javademo.ui.customview.IconView;
+import com.diomun.learn.javademo.ui.customview.RoundImageView;
 import com.diomun.learn.javademo.util.Img2bitmap;
 import com.diomun.learn.javademo.util.fileUtil;
 import com.theartofdev.edmodo.cropper.CropImage;
@@ -31,16 +32,22 @@ import butterknife.OnClick;
  */
 public class RegisterActivity extends BaseActivity {
 
+    @BindView(R.id.ic_back)
+    IconView icBack;
+    @BindView(R.id.et_email)
+    EditText etEmail;
+    @BindView(R.id.iv_headImg)
+    RoundImageView ivHeadImg;
     @BindView(R.id.layout_head)
-    ConstraintLayout textTop;
-    @BindView(R.id.et_username)
-    EditText etUsername;
-    @BindView(R.id.et_password)
-    EditText etPassword;
+    ConstraintLayout layoutHead;
     @BindView(R.id.btn_register)
     Button btnRegister;
-    @BindView(R.id.iv_headImg)
-    ImageView ivHeadImg;
+    @BindView(R.id.et_username)
+    EditText etUsername;
+    @BindView(R.id.et_pwd)
+    EditText etPwd;
+    @BindView(R.id.et_pwd_valid)
+    EditText etPwdValid;
 
     @Override
     public int initLayout() {
@@ -53,7 +60,8 @@ public class RegisterActivity extends BaseActivity {
     }
 
     @Override
-    public void initData() { }
+    public void initData() {
+    }
 
     /**
      * 获取处理后返回系统文件的链接

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- 圆形 View to RoundImageView-->
+    <attr name="borderRadius" format="dimension" />
+    <attr name="type">
+        <enum name="circle" value="0" />
+        <enum name="round" value="1" />
+    </attr>
+
+    <declare-styleable name="RoundImageView">
+        <attr name="borderRadius" />
+        <attr name="type" />
+    </declare-styleable>
+    <!-- END 圆形 View to RoundImageView-->
+
+    <!-- Custom View Test -->
+    <declare-styleable name="CustomView">
+        <!-- 使用：R.styleable.custom_attrs_custom_color1 -->
+        <attr name="custom_color1" format="color" />
+        <attr name="custom_color2" format="color" />
+        <attr name="custom_color3" format="color" />
+        <attr name="custom_color4" format="color" />
+        <attr name="custom_color5" format="color" />
+    </declare-styleable>
+
+    <style name="myStyle">
+        <!-- item 的名字须是已定义的，如上面的attr -->
+        <item name="custom_color1">#9C27B0</item>
+        <item name="custom_color2">#303F9F</item>
+        <item name="custom_color3">#2196F3</item>
+        <item name="custom_color4">#4CAF50</item>
+        <item name="custom_color5">#FFEB3B</item>
+    </style>
+    <!-- END Custom View Test -->
+
+    <declare-styleable name="lineEdittext">
+        <attr name="drawableFocus" format="reference"/>
+        <attr name="drawableUnFocus" format="reference" />
+        <attr name="drawableError" format="reference" />
+    </declare-styleable>
+
+    <style name="EdittextStyle">
+        <item name="drawableFocus">@drawable/user_select</item>
+        <item name="drawableUnFocus">@drawable/user</item>
+        <item name="drawableError">@drawable/user_error</item>
+    </style>
+</resources>

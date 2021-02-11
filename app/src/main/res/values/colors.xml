@@ -4,6 +4,12 @@
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#88A6FF</color>
 
+    <!-- user defined -->
+    <color name="error">#F57272</color>
+    <color name="unFocus">#515151</color>
+    <color name="textColor">#212121</color>
+
+    <!-- color set -->
     <color name="black">#000000</color><!--黑色 -->
     <color name="white">#FFFFFF</color><!--白色-->
     <color name="snow">#fffafa</color><!--雪白色 -->
