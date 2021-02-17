@@ -4,9 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
-import android.graphics.Canvas;
 import android.graphics.Color;
-import android.graphics.Paint;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.text.Editable;
@@ -32,7 +30,6 @@ import java.util.Objects;
  */
 public class LineEditText extends AppCompatEditText implements TextWatcher, View.OnFocusChangeListener {
     private final String TAG = "LineEditText";
-    private Paint mPaint;
     private int color;
     public static final int STATUS_FOCUSED = 1;
     public static final int STATUS_UNFOCUSED = 2;
@@ -43,6 +40,7 @@ public class LineEditText extends AppCompatEditText implements TextWatcher, View
     private int focusedDrawableId = R.drawable.user_select;
     private int unfocusedDrawableId = R.drawable.user; // 默认的
     private int errorDrawableId = R.drawable.user_error;
+    private int iconSize = 50;
     Drawable left = null;
     private Context mContext;
     /**
@@ -92,10 +90,10 @@ public class LineEditText extends AppCompatEditText implements TextWatcher, View
         // 对是否显示右侧“清空文本”图标进行判断
         if (TextUtils.isEmpty(s)) {
             // 如果为空，则不显示删除图标
-            setCompoundDrawablesWithIntrinsicBounds(left, null, null, null);
+            setCompoundDrawables(left, null, null, null);
         } else {
             // 如果非空，则要显示删除图标
-            setCompoundDrawablesWithIntrinsicBounds(left, null, del_btn, null);
+            setCompoundDrawables(left, null, del_btn, null);
         }
     }
 
@@ -108,10 +106,10 @@ public class LineEditText extends AppCompatEditText implements TextWatcher, View
         if (hasFocus) {
             if (TextUtils.isEmpty(s)) {
                 // 如果为空，则不显示删除图标
-                setCompoundDrawablesWithIntrinsicBounds(left, null, null, null);
+                setCompoundDrawables(left, null, null, null);
             } else {
                 // 如果非空，则要显示删除图标
-                setCompoundDrawablesWithIntrinsicBounds(left, null, del_btn, null);
+                setCompoundDrawables(left, null, del_btn, null);
             }
         }
     }
@@ -137,54 +135,52 @@ public class LineEditText extends AppCompatEditText implements TextWatcher, View
         }
     }
 
-    @Override
-    protected void onDraw(Canvas canvas) {
-        super.onDraw(canvas);
-        mPaint.setColor(color);
-        int x = this.getScrollX();
-        int w = this.getMeasuredWidth();
-        // 处理输入长度超过输入框的情况，使文本框向外延伸
-        canvas.drawLine(0, this.getHeight() - 2, this.getWidth(),
-                this.getHeight() - 2, mPaint);
-    }
-
     private void init() {
-        // 画笔
-        mPaint = new Paint();
-        mPaint.setStrokeWidth(3.0f);
         color = Color.parseColor("#bfbfbf");
         // 初始状态：无焦点
         setStatus(status);
+
         del_btn = mContext.getResources().getDrawable(R.drawable.del_btn_bg);
         del_btn_down = mContext.getResources().getDrawable(R.drawable.del_btn_bg_down);
+
+        // 统一图标大小
+        del_btn.setBounds(0, 0, iconSize, iconSize);
+        del_btn_down.setBounds(0, 0, iconSize, iconSize);
+        left.setBounds(0, 0, iconSize, iconSize);
+
         addListeners();
-        setCompoundDrawablesWithIntrinsicBounds(left, null, null, null);
+        setCompoundDrawables(left, null, null, null);
     }
 
     /**
      * 发生点击事件时
+     * 注意：一次点击会触发两次onTouchEvent
      */
     @SuppressLint("ClickableViewAccessibility")
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         // 处理点击“清空按钮”时的事件，提高容错
+        boolean noText = TextUtils.isEmpty(Objects.requireNonNull(getText()).toString());
+        boolean ifClear = (getWidth() - clickUpx) <= getCompoundPaddingRight();
         // 1. 判断是否有文字
-        if (!TextUtils.isEmpty(Objects.requireNonNull(getText()).toString())) {
+        if (!noText) {
             // 2. 判断点击位置是否在“清空”按钮生效范围
             clickUpx = (int) event.getX();
             // Log.i(TAG, " width: " + getWidth() + " x：" + clickUpx + " paddingRight: " + getCompoundPaddingRight());
             // 当 点击的坐标 到 当前输入框右侧的距离 小于等于 getCompoundPaddingRight() 的距离时，则认为是点击了删除图标
-            if ((getWidth() - clickUpx) <= getCompoundPaddingRight()) {
+            if (ifClear) {
                 // 3. 手指点击抬起后才触发“清空”
-                if (del_btn != null && event.getAction() == MotionEvent.ACTION_UP) {
+                if (del_btn != null && event.getAction() == MotionEvent.ACTION_DOWN) {
+                    setCompoundDrawables(left, null, del_btn_down, null);
+                } else if (del_btn != null && event.getAction() == MotionEvent.ACTION_UP) {
                     setText("");
-                    setCompoundDrawablesWithIntrinsicBounds(left, null, null, null);
-                } else if (del_btn != null && event.getAction() == MotionEvent.ACTION_DOWN) {
-                    setCompoundDrawablesWithIntrinsicBounds(left, null, del_btn_down, null);
+                    setCompoundDrawables(left, null, null, null);
                 }
+            } else {
+                // 如果有文字时，当从另一个文本框点回来，重新显示清空按钮
+                setCompoundDrawables(left, null, del_btn, null);
             }
         }
-
         return super.onTouchEvent(event);
     }
 
@@ -192,33 +188,34 @@ public class LineEditText extends AppCompatEditText implements TextWatcher, View
     public void setStatus(int status) {
         this.status = status;
         Log.d(TAG, "setStatus: " + status);
+
         if (status == STATUS_ERROR) {
             try {
                 left = getResources().getDrawable(errorDrawableId);
             } catch (Resources.NotFoundException e) {
                 e.printStackTrace();
             }
-            setColor(R.color.error);
+            textColor(R.color.error);
         } else if (status == STATUS_FOCUSED) {
             try {
                 left = getResources().getDrawable(focusedDrawableId);
             } catch (Resources.NotFoundException e) {
                 e.printStackTrace();
             }
-            setColor(R.color.colorAccent);
+            textColor(R.color.colorAccent);
         } else {
             try {
                 left = getResources().getDrawable(unfocusedDrawableId);
             } catch (Resources.NotFoundException e) {
                 e.printStackTrace();
             }
-            setColor(R.color.unFocus);
+            textColor(R.color.unFocus);
         }
-        if (left != null) {
-            // left.setBounds(0, 0, 30, 40);
-            // this.setCompoundDrawables(left, null, null, null);
-            setCompoundDrawablesWithIntrinsicBounds(left, null, null, null);
+        boolean noText = TextUtils.isEmpty(Objects.requireNonNull(getText()).toString());
+        if (left != null && noText) {
+            setCompoundDrawables(left, null, null, null);
         }
+
         postInvalidate();
     }
 
@@ -247,7 +244,7 @@ public class LineEditText extends AppCompatEditText implements TextWatcher, View
             setStatus(STATUS_FOCUSED);
         } else {
             setStatus(STATUS_UNFOCUSED);
-            setCompoundDrawablesWithIntrinsicBounds(left, null, null, null);
+            setCompoundDrawables(left, null, null, null);
         }
     }
 
@@ -256,7 +253,7 @@ public class LineEditText extends AppCompatEditText implements TextWatcher, View
         super.finalize();
     }
 
-    public void setColor(int color) {
+    public void textColor(int color) {
         this.color = color;
         this.setTextColor(color);
         invalidate();
