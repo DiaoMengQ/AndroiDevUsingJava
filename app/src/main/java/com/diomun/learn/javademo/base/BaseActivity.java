@@ -35,6 +35,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     protected View mView;
     private AlertDialog mDialogLoading;
     private int layoutRes = -1;
+    private CustomEventListener customErrorListener = new CustomEventListener();
 
     protected WeakHandler mHandler = new WeakHandler(msg -> {
         handlerMsg(msg);
@@ -59,6 +60,7 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     /**
      * 初始化根布局
+     *
      * @return int layout的唯一识别号(R.layout.XXX)
      */
     public abstract int initLayout();
@@ -101,7 +103,7 @@ public abstract class BaseActivity extends AppCompatActivity {
                 // .errorDrawable(R.mipmap.ic_launcher)     //崩溃页面显示的图标 default: bug image
                 .restartActivity(MainActivity.class)      //重新启动后的页面
                 // .errorActivity(MyDefaultErrorActivity.class) //程序崩溃后显示的页面
-                .eventListener(new CustomEventListener())//设置监听
+                .eventListener(customErrorListener)//设置监听
                 .apply();
 
         CustomActivityOnCrash.install(this);
@@ -146,23 +148,25 @@ public abstract class BaseActivity extends AppCompatActivity {
     /**
      * 监听程序崩溃/重启
      */
-    private class CustomEventListener implements CustomActivityOnCrash.EventListener {
+    private static class CustomEventListener implements CustomActivityOnCrash.EventListener {
+        private static String crashTag = CustomEventListener.class.getSimpleName();
+
         //程序崩溃回调
         @Override
         public void onLaunchErrorActivity() {
-            Log.d(TAG, "程序崩溃回调");
+            Log.e(crashTag, "程序崩溃回调");
         }
 
         //重启程序时回调
         @Override
         public void onRestartAppFromErrorActivity() {
-            Log.d(TAG, "重启程序时回调");
+            Log.e(crashTag, "重启程序时回调");
         }
 
         //在崩溃提示页面关闭程序时回调
         @Override
         public void onCloseAppFromErrorActivity() {
-            Log.d(TAG, "在崩溃提示页面关闭程序时回调");
+            Log.e(crashTag, "在崩溃提示页面关闭程序时回调");
         }
 
     }
