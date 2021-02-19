@@ -12,4 +12,15 @@
     <!--  iconfont  -->
     <string name="ic_back">&#xe614;</string>
 
+<!--  错误提示页 提示语  -->
+    <string name="customactivityoncrash_error_activity_error_occurred_explanation">奇怪的错误增加了！\nSorry for the inconvenience.</string>
+    <string name="customactivityoncrash_error_activity_restart_app">重启程序</string>
+    <string name="customactivityoncrash_error_activity_close_app">关闭程序</string>
+    <string name="customactivityoncrash_error_activity_error_details">错误详情</string>
+    <string name="customactivityoncrash_error_activity_error_details_title">错误详情</string>
+    <string name="customactivityoncrash_error_activity_error_details_close">关闭</string>
+    <string name="customactivityoncrash_error_activity_error_details_copy">复制到剪切板</string>
+    <string name="customactivityoncrash_error_activity_error_details_copied">已复制到剪切板</string>
+    <string name="customactivityoncrash_error_activity_error_details_clipboard_label">错误信息</string>
+
 </resources>
