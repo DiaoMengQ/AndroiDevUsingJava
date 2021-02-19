@@ -2,16 +2,13 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:ignore="ContentDescription,HardcodedText"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.activity.MainActivity"
-    android:id="@+id/mainActivity">
+    tools:context=".ui.activity.DBManagerActivity">
 
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:layout_marginTop="16dp"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -25,11 +22,11 @@
             android:padding="32sp">
 
             <Button
-                android:id="@+id/btn_toListView"
+                android:id="@+id/btn_createDB"
                 android:layout_width="@dimen/width4btn"
                 android:layout_height="@dimen/height4btn"
                 android:padding="@dimen/padding4button"
-                android:text="打开listVIEW" />
+                android:text="创建数据库" />
 
             <Space
                 android:layout_width="0dp"
@@ -37,14 +34,14 @@
                 android:layout_weight="1" />
 
             <Button
-                android:id="@+id/btn_database"
+                android:id="@+id/btn_dataList"
                 android:layout_width="@dimen/width4btn"
                 android:layout_height="@dimen/height4btn"
                 android:padding="@dimen/padding4button"
-                android:text="数据库" />
+                android:text="查看所有数据" />
+
         </LinearLayout>
 
     </LinearLayout>
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,12 +1,12 @@
 package com.diomun.learn.javademo.ui.activity;
 
-import android.content.Intent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
 import com.diomun.learn.javademo.R;
 import com.diomun.learn.javademo.base.BaseActivity;
+import com.diomun.learn.javademo.database.UserDBHelper;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -14,17 +14,18 @@ import butterknife.OnClick;
 
 /**
  * @author DIOMUN dmq1212@qq.com
- * @date created on 2021/1/21
+ * @date created on 2021/2/18
+ * @desc
  */
-public class MainActivity extends BaseActivity {
-    @BindView(R.id.btn_toListView)
-    Button btnToListView;
-    @BindView(R.id.btn_database)
-    Button btnDatabase;
+public class DBManagerActivity extends BaseActivity {
+    @BindView(R.id.btn_createDB)
+    Button btnCreateDB;
+    @BindView(R.id.btn_dataList)
+    Button btnDataList;
 
     @Override
     public int initLayout() {
-        return R.layout.activity_main;
+        return R.layout.activity_dbmanager;
     }
 
     @Override
@@ -34,23 +35,19 @@ public class MainActivity extends BaseActivity {
 
     @Override
     public void initData() {
+        UserDBHelper dbHelper = new UserDBHelper(this, "userInfo.db",null, 1);
     }
 
-    @OnClick({R.id.btn_toListView, R.id.btn_database})
+    @OnClick({R.id.btn_createDB, R.id.btn_dataList})
     public void onViewClicked(View view) {
         switch (view.getId()) {
-            case R.id.btn_toListView:
-                Toast.makeText(mContext, "點擊btn_toListView", Toast.LENGTH_SHORT).show();
+            case R.id.btn_createDB:
+                Toast.makeText(mContext, "创建", Toast.LENGTH_SHORT).show();
                 break;
-            case R.id.btn_database:
-                Toast.makeText(mContext, "数据库管理页", Toast.LENGTH_SHORT).show();
-                Intent mIntent = new Intent(this,DBManagerActivity.class);
-                startActivity(mIntent);
-
+            case R.id.btn_dataList:
                 break;
             default:
                 throw new IllegalStateException("Unexpected value: " + view.getId());
         }
     }
 }
-
