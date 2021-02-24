@@ -29,6 +29,7 @@ public class BackServ extends Service {
     @Override
     public void onCreate() {
         super.onCreate();
+        Log.d(TAG, "onCreate: ");
     }
 
     @Override
@@ -38,16 +39,27 @@ public class BackServ extends Service {
         final ThreadFactory timedThreadFactory = new ThreadFactory() {
             @Override
             public Thread newThread(Runnable r) {
-                return new Thread(){
+                return new Thread() {
                     @Override
                     public void run() {
-                        super.run();
-                        Log.d(TAG, "run: 线程测试");
+                        r.run(); // 注意一定要用上面 r.run(), 不可使用super.run()
+                        Log.d(TAG, "run: 线程工厂");
                     }
                 };
             }
         };
-        ScheduledExecutorService singleThreadScheduledExecutor = new ScheduledThreadPoolExecutor(1,timedThreadFactory);
+
+        ScheduledExecutorService singleThreadScheduledExecutor = new ScheduledThreadPoolExecutor(1, timedThreadFactory);
+        singleThreadScheduledExecutor.scheduleWithFixedDelay(() -> {
+            Log.e(TAG, "run: 定时任务" + System.currentTimeMillis() / 1000);
+            try {
+                Thread.sleep(3000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
+        }, 1, 1, TimeUnit.SECONDS);
+        Log.d(TAG, "onStartCommand: start end");
 
         return super.onStartCommand(intent, flags, startId);
     }
