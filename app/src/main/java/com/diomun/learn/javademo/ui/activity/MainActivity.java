@@ -7,7 +7,7 @@ import android.widget.Toast;
 
 import com.diomun.learn.javademo.R;
 import com.diomun.learn.javademo.base.BaseActivity;
-import com.diomun.learn.javademo.service.BackServ;
+import com.diomun.learn.javademo.service.BackService;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -51,7 +51,7 @@ public class MainActivity extends BaseActivity {
                 startActivity(mIntent);
                 break;
             case R.id.btn_startBackService:
-                Intent intent2startService = new Intent(this, BackServ.class);
+                Intent intent2startService = new Intent(this, BackService.class);
                 startService(intent2startService);
                 break;
             default:

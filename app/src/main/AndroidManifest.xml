@@ -50,7 +50,7 @@
         </activity>
 
         <!--    后台服务（不可交互）    -->
-        <service android:name=".service.BackServ" />
+        <service android:name=".service.BackService" />
 
     </application>
 
