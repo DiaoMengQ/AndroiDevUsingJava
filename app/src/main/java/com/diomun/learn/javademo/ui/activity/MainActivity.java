@@ -7,6 +7,7 @@ import android.widget.Toast;
 
 import com.diomun.learn.javademo.R;
 import com.diomun.learn.javademo.base.BaseActivity;
+import com.diomun.learn.javademo.service.BackServ;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -21,6 +22,8 @@ public class MainActivity extends BaseActivity {
     Button btnToListView;
     @BindView(R.id.btn_database)
     Button btnDatabase;
+    @BindView(R.id.btn_startBackService)
+    Button btnStartBackService;
 
     @Override
     public int initLayout() {
@@ -36,7 +39,7 @@ public class MainActivity extends BaseActivity {
     public void initData() {
     }
 
-    @OnClick({R.id.btn_toListView, R.id.btn_database})
+    @OnClick({R.id.btn_toListView, R.id.btn_database, R.id.btn_startBackService})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.btn_toListView:
@@ -44,9 +47,12 @@ public class MainActivity extends BaseActivity {
                 break;
             case R.id.btn_database:
                 Toast.makeText(mContext, "数据库管理页", Toast.LENGTH_SHORT).show();
-                Intent mIntent = new Intent(this,DBManagerActivity.class);
+                Intent mIntent = new Intent(this, DBManagerActivity.class);
                 startActivity(mIntent);
-
+                break;
+            case R.id.btn_startBackService:
+                Intent intent2startService = new Intent(this, BackServ.class);
+                startService(intent2startService);
                 break;
             default:
                 throw new IllegalStateException("Unexpected value: " + view.getId());

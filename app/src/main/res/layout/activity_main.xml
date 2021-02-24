@@ -6,7 +6,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.activity.MainActivity"
-    android:id="@+id/mainActivity">
+    android:id="@+id/mainActivity"
+    android:padding="@dimen/padding_page">
 
     <LinearLayout
         android:layout_width="0dp"
@@ -20,15 +21,14 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:padding="32sp">
+            android:padding="@dimen/padding_linear">
 
             <Button
                 android:id="@+id/btn_toListView"
                 android:layout_width="@dimen/width4btn"
                 android:layout_height="@dimen/height4btn"
-                android:padding="@dimen/padding4button"
                 android:text="打开listVIEW" />
 
             <Space
@@ -40,8 +40,22 @@
                 android:id="@+id/btn_database"
                 android:layout_width="@dimen/width4btn"
                 android:layout_height="@dimen/height4btn"
-                android:padding="@dimen/padding4button"
                 android:text="数据库" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="@dimen/padding_linear">
+
+            <Button
+                android:id="@+id/btn_startBackService"
+                android:layout_width="@dimen/width4btn"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="启动服务" />
         </LinearLayout>
 
     </LinearLayout>

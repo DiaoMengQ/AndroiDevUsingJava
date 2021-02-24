@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="padding4button">16sp</dimen>
+    <dimen name="padding4button">16dp</dimen>
     <dimen name="width4btn">150dp</dimen>
     <dimen name="height4btn">70dp</dimen>
-    <dimen name="padding_page">20sp</dimen>
+    <dimen name="padding_page">20dp</dimen>
     <dimen name="size_ic_back">20sp</dimen>
+    <dimen name="padding_linear">16dp</dimen>
 </resources>
