@@ -48,6 +48,10 @@
         <!-- 临时测试页 -->
         <activity android:name=".ui.activity.ViewTestActivity">
         </activity>
+
+        <!--    后台服务（不可交互）    -->
+        <service android:name=".service.BackServ" />
+
     </application>
 
 </manifest>
