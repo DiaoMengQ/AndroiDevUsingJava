@@ -5,7 +5,7 @@ import java.text.SimpleDateFormat;
 /**
  * @author DIOMUN dmq1212@qq.com
  * @date created on 2021/2/24
- * @desc
+ * @desc 获取当前时间并格式化
  */
 public class MyTimeUtils {
     public static String getSystemTime(){
