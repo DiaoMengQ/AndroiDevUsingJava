@@ -6,4 +6,5 @@
     <dimen name="padding_page">20dp</dimen>
     <dimen name="size_ic_back">20sp</dimen>
     <dimen name="padding_linear">16dp</dimen>
+    <dimen name="margin_btn">12dp</dimen>
 </resources>
