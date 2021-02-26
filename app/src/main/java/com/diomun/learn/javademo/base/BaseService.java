@@ -31,10 +31,15 @@ public abstract class BaseService extends Service {
         return super.onStartCommand(intent, flags, startId);
     }
 
+    /**
+     * return的值定为true替换默认的super.onUnbind(intent)
+     * @param intent
+     * @return true
+     */
     @Override
     public boolean onUnbind(Intent intent) {
         Log.d(TAG, "onUnbind: Service 已解除绑定");
-        return super.onUnbind(intent);
+        return true;
     }
 
     @Override

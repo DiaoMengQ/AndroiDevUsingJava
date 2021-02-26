@@ -12,9 +12,13 @@ import androidx.annotation.Nullable;
 import com.diomun.learn.javademo.base.BaseService;
 import com.diomun.learn.javademo.util.MyTimeUtils;
 
+import java.util.UUID;
+import java.util.concurrent.ExecutorService;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledThreadPoolExecutor;
+import java.util.concurrent.SynchronousQueue;
 import java.util.concurrent.ThreadFactory;
+import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -49,29 +53,61 @@ public class BackService extends BaseService {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        final ThreadFactory timedThreadFactory = r -> new Thread(() -> {
-            r.run();
-            Log.d(TAG, "run: test ThreadFactory");
-        });
+        // 线程工厂，可以对每个线程进行单独处理，如设定线程的标识符
+        // final ThreadFactory ScheduledTF = r -> new Thread(() -> {
+        //     r.run();
+        //     Log.d(TAG, "run: test ThreadFactory");
+        // });
 
-        ScheduledExecutorService singleThreadScheduledExecutor = new ScheduledThreadPoolExecutor(1, timedThreadFactory);
-        singleThreadScheduledExecutor.scheduleWithFixedDelay(() -> {
-            Log.e(TAG, "run: 定时任务" + MyTimeUtils.getSystemTime());
-        }, 1, 3, TimeUnit.SECONDS);
+        final ThreadFactory ScheduledTF = r -> {
+            Log.d(TAG, "run: test ThreadFactory");
+            Thread scheduledThread = new Thread("Scheduled-task");
+            scheduledThread.start();
+            return scheduledThread;
+        };
+
+        ScheduledExecutorService singleThreadScheduledExecutor = new ScheduledThreadPoolExecutor(1, ScheduledTF);
+        singleThreadScheduledExecutor.scheduleWithFixedDelay(() -> Log.e(TAG, "run: 定时任务" + MyTimeUtils.getSystemTime()), 1, 3, TimeUnit.SECONDS);
 
         return super.onStartCommand(intent, flags, startId);
     }
 
-    //接受广播
+    // 接收广播
     private class CommandReceiver extends BroadcastReceiver {
         @Override
         public void onReceive(Context context, Intent intent) {
             int cmd = intent.getIntExtra("cmd", -1);
             if (cmd == BackService.CMD_STOP_SERVICE) {//如果等于0
-                flag = false;//停止线程
-                stopSelf();//停止服务
+                flag = false; // 停止线程
+                stopSelf(); // 停止服务
             }
         }
 
+    }
+
+    public void doJob() {
+        ExecutorService catchThreadExecutor =
+                new ThreadPoolExecutor(0, Integer.MAX_VALUE,
+                60L, TimeUnit.SECONDS,
+                new SynchronousQueue<Runnable>());
+
+        // new Thread() {
+        //     @Override
+        //     public void run() {
+        //         while (flag) {//如果==true执行发送广播
+        //             try {
+        //                 Thread.sleep(1000);//休眠1秒
+        //             } catch (InterruptedException e) {
+        //                 e.printStackTrace();
+        //             }
+        //             Log.i("onStartCommand", "run=");
+        //             Intent intent = new Intent();
+        //             intent.setAction("AAAAA");
+        //             intent.putExtra("data", UUID.randomUUID() + "");
+        //             sendBroadcast(intent);//发送广播名称aaaaa 参数名字data
+        //
+        //         }
+        //     }
+        // }.start();
     }
 }
