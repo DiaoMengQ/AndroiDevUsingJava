@@ -10,9 +10,9 @@ import android.util.Log;
 import androidx.annotation.Nullable;
 
 import com.diomun.learn.javademo.base.BaseService;
+import com.diomun.learn.javademo.ui.activity.MainActivity;
 import com.diomun.learn.javademo.util.MyTimeUtils;
 
-import java.util.UUID;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledThreadPoolExecutor;
@@ -26,7 +26,7 @@ import java.util.concurrent.TimeUnit;
  * @date created on 2021/2/23
  */
 public class BackService extends BaseService {
-    private static final int CMD_STOP_SERVICE = 0;
+    CommandReceiver cmdReceiver;
     private boolean flag;
 
     @Nullable
@@ -46,19 +46,14 @@ public class BackService extends BaseService {
     }
 
     @Override
-    public void onCreate() {
-        super.onCreate();
+    protected void initData() {
         flag = true;
+        cmdReceiver = new CommandReceiver();
     }
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         // 线程工厂，可以对每个线程进行单独处理，如设定线程的标识符
-        // final ThreadFactory ScheduledTF = r -> new Thread(() -> {
-        //     r.run();
-        //     Log.d(TAG, "run: test ThreadFactory");
-        // });
-
         final ThreadFactory ScheduledTF = r -> {
             Log.d(TAG, "run: test ThreadFactory");
             Thread scheduledThread = new Thread("Scheduled-task");
@@ -77,7 +72,7 @@ public class BackService extends BaseService {
         @Override
         public void onReceive(Context context, Intent intent) {
             int cmd = intent.getIntExtra("cmd", -1);
-            if (cmd == BackService.CMD_STOP_SERVICE) {//如果等于0
+            if (cmd == MainActivity.CMD_STOP_SERVICE) {//如果等于0
                 flag = false; // 停止线程
                 stopSelf(); // 停止服务
             }
@@ -88,8 +83,8 @@ public class BackService extends BaseService {
     public void doJob() {
         ExecutorService catchThreadExecutor =
                 new ThreadPoolExecutor(0, Integer.MAX_VALUE,
-                60L, TimeUnit.SECONDS,
-                new SynchronousQueue<Runnable>());
+                        60L, TimeUnit.SECONDS,
+                        new SynchronousQueue<Runnable>());
 
         // new Thread() {
         //     @Override

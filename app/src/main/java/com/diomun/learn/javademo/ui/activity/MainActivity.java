@@ -27,6 +27,8 @@ import butterknife.OnClick;
  * @date created on 2021/1/21
  */
 public class MainActivity extends BaseActivity {
+    public static final int CMD_STOP_SERVICE = 0;
+
     @BindView(R.id.btn_toListView)
     Button btnToListView;
     @BindView(R.id.btn_database)
@@ -101,7 +103,11 @@ public class MainActivity extends BaseActivity {
                 break;
             case R.id.btn_stopBackService:
                 Toast.makeText(mContext, "停止服务", Toast.LENGTH_SHORT).show();
-                mContext.stopService(intent2backServ);
+                // 发送停止服务广播
+                Intent it2stopService = new Intent();
+                it2stopService.setAction("AAAAA");
+                it2stopService.putExtra("cmd", CMD_STOP_SERVICE);
+                sendBroadcast(it2stopService);
                 break;
             case R.id.btn_unBindBackService:
                 Toast.makeText(mContext, "解绑服务", Toast.LENGTH_SHORT).show();
@@ -114,10 +120,8 @@ public class MainActivity extends BaseActivity {
 
                 for (ActivityManager.RunningServiceInfo info : list) {
                     // Log.d(TAG, "backSerivce: " + info);
-                    if ("com.diomun.learn.javademo.service.BackService".equals(info.service.getClassName())) {
-                        Log.d(TAG, "onViewClicked: running......");
-                    } else {
-                        Log.d(TAG, "onViewClicked: connot find");
+                    if ("Scheduled-task".equals(info.service.getClassName())) {
+                        Log.d(TAG, "backService: Scheduled-task running......");
                     }
                 }
                 break;

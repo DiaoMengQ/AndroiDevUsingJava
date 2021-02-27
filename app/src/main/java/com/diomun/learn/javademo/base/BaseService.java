@@ -22,8 +22,12 @@ public abstract class BaseService extends Service {
     @Override
     public void onCreate() {
         super.onCreate();
-        Log.d(TAG, "onCreate: 父类");
+        Log.d(TAG, "onCreate: ");
+
+        initData();
     }
+
+    protected abstract void initData();
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
