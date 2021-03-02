@@ -36,9 +36,9 @@ public abstract class BaseService extends Service {
     }
 
     /**
-     * return的值定为true替换默认的super.onUnbind(intent)
+     * return的值固定为true，以使Activity重新绑定服务后执行onRebind() 而不是 bind()
      * @param intent
-     * @return true
+     * @return 默认值 super.onUnbind(intent)
      */
     @Override
     public boolean onUnbind(Intent intent) {
