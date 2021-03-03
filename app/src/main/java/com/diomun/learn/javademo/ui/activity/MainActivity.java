@@ -62,7 +62,7 @@ public class MainActivity extends BaseActivity {
         servConn = new ServiceConnection() {
             @Override
             public void onServiceConnected(ComponentName name, IBinder service) {
-                Log.d(TAG, "onServiceConnected: ");
+                Log.d(TAG, "onServiceConnected: 服务已绑定");
                 BackService.MyBinder myBinder = (BackService.MyBinder) service;
                 myBinder.showTip();
             }
@@ -73,7 +73,7 @@ public class MainActivity extends BaseActivity {
              */
             @Override
             public void onServiceDisconnected(ComponentName name) {
-                Log.d(TAG, "onServiceDisconnected: ");
+                Log.d(TAG, "onServiceDisconnected: 服务绑定丢失");
             }
         };
     }
@@ -104,10 +104,10 @@ public class MainActivity extends BaseActivity {
             case R.id.btn_stopBackService:
                 Toast.makeText(mContext, "停止服务", Toast.LENGTH_SHORT).show();
                 // 发送停止服务广播
-                Intent it2stopService = new Intent();
-                it2stopService.setAction("AAAAA");
-                it2stopService.putExtra("cmd", CMD_STOP_SERVICE);
-                sendBroadcast(it2stopService);
+                Intent intent2stopServ = new Intent();
+                intent2stopServ.setAction("AAAAA");
+                intent2stopServ.putExtra("cmd", CMD_STOP_SERVICE);
+                sendBroadcast(intent2stopServ);
                 break;
             case R.id.btn_unBindBackService:
                 Toast.makeText(mContext, "解绑服务", Toast.LENGTH_SHORT).show();

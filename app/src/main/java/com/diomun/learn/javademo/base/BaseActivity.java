@@ -55,7 +55,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     @Override
     protected void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
-        Log.d(TAG, String.format("%s onNewIntent", TAG));
+        Log.d(TAG, String.format("%s 从其他应用返回onNewIntent", TAG));
     }
 
     /**
