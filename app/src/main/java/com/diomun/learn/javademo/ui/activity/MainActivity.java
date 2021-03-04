@@ -78,7 +78,6 @@ public class MainActivity extends BaseActivity {
         };
     }
 
-
     @OnClick({
             R.id.btn_toListView,
             R.id.btn_database,
@@ -105,7 +104,7 @@ public class MainActivity extends BaseActivity {
                 Toast.makeText(mContext, "停止服务", Toast.LENGTH_SHORT).show();
                 // 发送停止服务广播
                 Intent intent2stopServ = new Intent();
-                intent2stopServ.setAction("AAAAA");
+                intent2stopServ.setAction(getString(R.string.action_stopBackService));
                 intent2stopServ.putExtra("cmd", CMD_STOP_SERVICE);
                 sendBroadcast(intent2stopServ);
                 break;

@@ -22,5 +22,6 @@
     <string name="customactivityoncrash_error_activity_error_details_copy">复制到剪切板</string>
     <string name="customactivityoncrash_error_activity_error_details_copied">已复制到剪切板</string>
     <string name="customactivityoncrash_error_activity_error_details_clipboard_label">错误信息</string>
+    <string name="action_stopBackService">AAAAA</string>
 
 </resources>
