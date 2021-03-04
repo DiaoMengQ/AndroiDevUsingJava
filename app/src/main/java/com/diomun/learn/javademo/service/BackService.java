@@ -10,6 +10,7 @@ import android.util.Log;
 
 import androidx.annotation.Nullable;
 
+import com.diomun.learn.javademo.R;
 import com.diomun.learn.javademo.base.BaseService;
 import com.diomun.learn.javademo.ui.activity.MainActivity;
 import com.diomun.learn.javademo.util.MyTimeUtils;
@@ -56,7 +57,7 @@ public class BackService extends BaseService {
 
     private void startTask() {
         IntentFilter intentFilter = new IntentFilter();
-        intentFilter.addAction("AAAAA");
+        intentFilter.addAction(getString(R.string.action_stopBackService));
         registerReceiver(cmdReceiver, intentFilter);
 
         Log.d(TAG, "startTask: ");
@@ -70,6 +71,7 @@ public class BackService extends BaseService {
         ScheduledExecutorService singleThreadScheduledExecutor = new ScheduledThreadPoolExecutor(1, ScheduledTF);
         singleThreadScheduledExecutor.scheduleWithFixedDelay(() ->
                 Log.e(TAG, "run: 定时任务" + MyTimeUtils.getSystemTime()), 1, 3, TimeUnit.SECONDS);
+
     }
 
     // 接收广播
@@ -81,6 +83,14 @@ public class BackService extends BaseService {
                 stopSelf(); // 停止服务
             }
         }
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        // 因为是服务开启的广播，所以当服务被关闭时同时清除广播
+        unregisterReceiver(cmdReceiver);
+        Log.d(TAG, "onDestroy: 清除广播注册");
     }
 
 }
