@@ -88,7 +88,18 @@
                 android:text="查看服务状态" />
         </LinearLayout>
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <Button
+                android:layout_width="0dp"
+                android:layout_height="@dimen/height4btn"
+                android:layout_weight="1"
+                android:layout_margin="@dimen/margin_btn"
+                android:text="打开RecycleView"
+                android:id="@+id/btn_toRecycleView"/>
+        </LinearLayout>
+
     </LinearLayout>
-
-
 </androidx.constraintlayout.widget.ConstraintLayout>

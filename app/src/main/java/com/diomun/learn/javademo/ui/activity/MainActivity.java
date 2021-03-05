@@ -5,11 +5,14 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
+import android.os.Bundle;
 import android.os.IBinder;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
+
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.diomun.learn.javademo.R;
 import com.diomun.learn.javademo.base.BaseActivity;
@@ -28,6 +31,8 @@ import butterknife.OnClick;
  */
 public class MainActivity extends BaseActivity {
     public static final int CMD_STOP_SERVICE = 0;
+    private Intent intent2backServ;
+    private ServiceConnection servConn;
 
     @BindView(R.id.btn_toListView)
     Button btnToListView;
@@ -41,9 +46,8 @@ public class MainActivity extends BaseActivity {
     Button btnViewBackService;
     @BindView(R.id.btn_unBindBackService)
     Button btnUnBindBackService;
-
-    Intent intent2backServ;
-    ServiceConnection servConn;
+    @BindView(R.id.btn_toRecycleView)
+    Button btnToRecycleView;
 
     @Override
     public int initLayout() {
@@ -84,16 +88,22 @@ public class MainActivity extends BaseActivity {
             R.id.btn_startBackService,
             R.id.btn_stopBackService,
             R.id.btn_viewBackService,
-            R.id.btn_unBindBackService})
+            R.id.btn_unBindBackService,
+            R.id.btn_toRecycleView})
     public void onViewClicked(View view) {
         switch (view.getId()) {
+            case R.id.btn_toRecycleView:
+                Toast.makeText(mContext, "btn_toRecycleView", Toast.LENGTH_SHORT).show();
+                Intent intent2Recycler = new Intent(this, RecyclerViewActivity.class);
+                startActivity(intent2Recycler);
+                break;
             case R.id.btn_toListView:
                 Toast.makeText(mContext, "點擊btn_toListView", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.btn_database:
                 Toast.makeText(mContext, "数据库管理页", Toast.LENGTH_SHORT).show();
-                Intent mIntent = new Intent(this, DBManagerActivity.class);
-                startActivity(mIntent);
+                Intent intent2DBManager = new Intent(this, DBManagerActivity.class);
+                startActivity(intent2DBManager);
                 break;
             case R.id.btn_startBackService:
                 Toast.makeText(mContext, "开启服务", Toast.LENGTH_SHORT).show();
@@ -128,6 +138,5 @@ public class MainActivity extends BaseActivity {
                 throw new IllegalStateException("Unexpected value: " + view.getId());
         }
     }
-
 }
 

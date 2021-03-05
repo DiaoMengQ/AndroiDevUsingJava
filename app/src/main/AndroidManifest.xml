@@ -49,6 +49,9 @@
         <activity android:name=".ui.activity.ViewTestActivity">
         </activity>
 
+        <!--    RecyclerView    -->
+        <activity android:name=".ui.activity.RecyclerViewActivity" />
+
         <!--    后台服务   -->
         <service android:name=".service.BackService" />
 
