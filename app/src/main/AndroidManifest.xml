@@ -51,6 +51,7 @@
 
         <!--    RecyclerView    -->
         <activity android:name=".ui.activity.RecyclerViewActivity" />
+        <activity android:name=".ui.activity.ListViewActivity" />
 
         <!--    后台服务   -->
         <service android:name=".service.BackService" />

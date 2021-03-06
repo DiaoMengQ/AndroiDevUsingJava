@@ -79,7 +79,8 @@ public class BackService extends BaseService {
         @Override
         public void onReceive(Context context, Intent intent) {
             int cmd = intent.getIntExtra("cmd", -1);
-            if (cmd == MainActivity.CMD_STOP_SERVICE) {//如果等于0
+            if (cmd == MainActivity.CMD_STOP_SERVICE) { //如果等于0
+                // TODO: 问题:停止服务后线程仍继续运行
                 stopSelf(); // 停止服务
             }
         }
