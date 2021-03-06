@@ -45,11 +45,11 @@ public class Adapter4RecyclerView extends RecyclerView.Adapter<Adapter4RecyclerV
         return list.size();
     }
 
-    public static class MyViewHolder extends RecyclerView.ViewHolder {
+    static class MyViewHolder extends RecyclerView.ViewHolder {
 
         private final TextView itemText;
 
-        public MyViewHolder(View itemView) {
+        MyViewHolder(View itemView) {
             super(itemView);
             itemText = itemView.findViewById(R.id.item_text);
         }

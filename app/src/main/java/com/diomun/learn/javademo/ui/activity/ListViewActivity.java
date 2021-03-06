@@ -23,6 +23,6 @@ public class ListViewActivity extends BaseActivity {
 
     @Override
     public void initData() {
-        
+
     }
 }
