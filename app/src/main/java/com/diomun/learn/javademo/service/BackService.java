@@ -64,7 +64,7 @@ public class BackService extends BaseService {
         // 线程工厂，可以对每个线程进行单独处理，如设定线程的标识符
         final ThreadFactory ScheduledTF = r -> {
             Log.d(TAG, "run: test ThreadFactory");
-            Thread scheduledThread = new Thread("Scheduled-task");
+            Thread scheduledThread = new Thread(r, "Scheduled-task"); // 这是对r的处理，别忘了把原本的 r 传进去！
             return scheduledThread;
         };
 
