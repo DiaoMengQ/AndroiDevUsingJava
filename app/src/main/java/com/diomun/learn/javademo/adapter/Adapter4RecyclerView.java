@@ -16,7 +16,7 @@ import java.util.List;
 /**
  * @author DIOMUN dmq1212@qq.com
  * @date created on 2021/3/5
- * @desc
+ * @desc 测试文字数据 RecycleView 适配器
  */
 public class Adapter4RecyclerView extends RecyclerView.Adapter<Adapter4RecyclerView.MyViewHolder> {
     private Context context;
