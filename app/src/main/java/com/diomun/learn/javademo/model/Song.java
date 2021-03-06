@@ -6,12 +6,25 @@ package com.diomun.learn.javademo.model;
  * @desc
  */
 public class Song {
-    private String sName;
+    private String sName = "未知曲名";
+    private String sSinger = "佚名";
     private String sUrl;
     private String sAlbumUrl;
-    private String sSinger;
 
     public Song() {
+    }
+
+
+    public Song(String sUrl) {
+        this.sUrl = sUrl;
+        this.sName = "未知曲名";
+        this.sSinger = "佚名";
+    }
+
+    public Song(String sName, String sSinger, String sUrl) {
+        this.sName = sName;
+        this.sUrl = sUrl;
+        this.sSinger = sSinger;
     }
 
     public Song(String sName, String sSinger, String sUrl, String sAlbumUrl) {

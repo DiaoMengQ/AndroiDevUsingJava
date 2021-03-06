@@ -84,8 +84,8 @@ public abstract class BaseActivity extends AppCompatActivity {
         layoutRes = initLayout();
         setContentView(layoutRes);
 
-        initView();
         initData();
+        initView();
 
         // 崩溃信息页 设置项
         // 整个配置属性，可以设置零个或多个，如果没有任何配置，程序崩溃显示的是默认的设置

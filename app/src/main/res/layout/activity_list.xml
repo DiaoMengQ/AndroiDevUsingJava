@@ -3,6 +3,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".ui.activity.ListViewActivity">
+    tools:context=".ui.activity.ListViewActivity"
+    android:padding="@dimen/padding_page">
 
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/lv_song"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

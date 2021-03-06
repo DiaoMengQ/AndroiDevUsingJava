@@ -99,6 +99,8 @@ public class MainActivity extends BaseActivity {
                 break;
             case R.id.btn_toListView:
                 Toast.makeText(mContext, "點擊btn_toListView", Toast.LENGTH_SHORT).show();
+                Intent intent2ListView = new Intent(this,ListViewActivity.class);
+                startActivity(intent2ListView);
                 break;
             case R.id.btn_database:
                 Toast.makeText(mContext, "数据库管理页", Toast.LENGTH_SHORT).show();
