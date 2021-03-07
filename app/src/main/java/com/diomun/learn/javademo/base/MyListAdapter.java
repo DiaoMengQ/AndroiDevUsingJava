@@ -16,14 +16,14 @@ import java.util.LinkedList;
  * @date created on 2021/3/6
  * @desc 自定义 Adapter 基本类
  */
-public abstract class MyBaseAdapter<T> extends BaseAdapter {
+public abstract class MyListAdapter<T> extends BaseAdapter {
     private LinkedList<T> mData;
     private int mLayoutRes;
 
-    public MyBaseAdapter() {
+    public MyListAdapter() {
     }
 
-    public MyBaseAdapter(LinkedList<T> mData, int mLayoutRes) {
+    public MyListAdapter(LinkedList<T> mData, int mLayoutRes) {
         this.mData = mData;
         this.mLayoutRes = mLayoutRes;
     }
