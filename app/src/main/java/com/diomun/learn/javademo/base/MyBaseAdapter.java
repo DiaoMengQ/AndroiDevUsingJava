@@ -51,7 +51,7 @@ public abstract class MyBaseAdapter<T> extends BaseAdapter {
         return holder.getItemView();
     }
 
-    abstract void bindView(ViewHolder holder, T obj);
+    protected abstract void bindView(ViewHolder holder, T obj);
 
     /**
      * 添加一个元素
