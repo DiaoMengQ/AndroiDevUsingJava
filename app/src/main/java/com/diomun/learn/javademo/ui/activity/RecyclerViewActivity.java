@@ -1,9 +1,15 @@
 package com.diomun.learn.javademo.ui.activity;
 
+import android.view.View;
+import android.widget.Toast;
+
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import com.diomun.learn.javademo.R;
-import com.diomun.learn.javademo.adapter.Adapter4RecyclerView;
+import com.diomun.learn.javademo.adapter.RecyclerAdapter;
 import com.diomun.learn.javademo.base.BaseActivity;
 
 import java.util.ArrayList;
@@ -17,10 +23,11 @@ import butterknife.BindView;
  * @date created on 2021/3/4
  * @desc
  */
-public class RecyclerViewActivity extends BaseActivity {
+public class RecyclerViewActivity extends BaseActivity implements RecyclerAdapter.OnChildClickListener {
     @BindView(R.id.recycler)
     RecyclerView recycler;
-    private Adapter4RecyclerView adapter4RecyclerView;
+    private RecyclerAdapter recyclerAdapter;
+    private List<String> list;
 
     @Override
     public int initLayout() {
@@ -29,16 +36,48 @@ public class RecyclerViewActivity extends BaseActivity {
 
     @Override
     public void initView() {
+        recyclerAdapter = new RecyclerAdapter(this, list);
+
+        // 线性布局
+        // LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, true);
+
+        // 网格布局
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 3, LinearLayoutManager.VERTICAL, false);
+        gridLayoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
+            @Override
+            public int getSpanSize(int position) {
+                if (position == 0) {
+                    return 3;
+                }
+                if (position == 1) {
+                    return 2;
+                }
+                return 1;
+            }
+        });
+
+        // 瀑布流!
+        StaggeredGridLayoutManager staggeredGridLayoutManager = new StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL);
+
+        recycler.setLayoutManager(staggeredGridLayoutManager);
+        recycler.setAdapter(recyclerAdapter);
+        recyclerAdapter.setOnChildClickListener(this);
     }
 
     @Override
     public void initData() {
-        List<String> list = new ArrayList<>();
+        list = new ArrayList<>();
         for (int i = 0; i < 100; i++) {
-            list.add(String.format(Locale.CHINA, "第%03d条数据", i));
+            String str = i % 3 != 0 ? "" : "--------------------------------";
+            list.add(String.format(Locale.CHINA, "%s第%03d条数据%s", str, i, str));
         }
-        adapter4RecyclerView = new Adapter4RecyclerView(this, list);
-        recycler.setAdapter(adapter4RecyclerView);
+
     }
 
+    @Override
+    public void onChildClick(RecyclerView parent, View view, int position, String data) {
+        Toast.makeText(mContext, data, Toast.LENGTH_SHORT).show();
+        // recyclerAdapter.remove(position);
+    }
 }
