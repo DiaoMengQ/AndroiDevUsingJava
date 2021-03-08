@@ -1,10 +1,5 @@
 package com.diomun.learn.javademo.ui.activity;
 
-import android.content.Context;
-import android.content.res.TypedArray;
-import android.util.AttributeSet;
-import android.widget.TextView;
-
 import com.diomun.learn.javademo.R;
 import com.diomun.learn.javademo.base.BaseActivity;
 
@@ -21,11 +16,9 @@ public class ViewTestActivity extends BaseActivity {
 
     @Override
     public void initView() {
-
     }
 
     @Override
     public void initData() {
-
     }
 }

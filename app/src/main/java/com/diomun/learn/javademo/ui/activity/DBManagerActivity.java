@@ -9,7 +9,6 @@ import com.diomun.learn.javademo.base.BaseActivity;
 import com.diomun.learn.javademo.database.UserDBHelper;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 /**

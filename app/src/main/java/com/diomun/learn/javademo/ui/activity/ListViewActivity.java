@@ -11,7 +11,6 @@ import java.util.LinkedList;
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 
 /**
  * @author DIOMUN dmq1212@qq.com
