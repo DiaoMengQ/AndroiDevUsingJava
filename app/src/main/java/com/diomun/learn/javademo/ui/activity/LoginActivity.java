@@ -44,7 +44,6 @@ public class LoginActivity extends BaseActivity {
 
     @Override
     public void initView() {
-        ButterKnife.bind(this);
     }
 
     @Override

@@ -11,7 +11,6 @@ import java.util.List;
 import java.util.Locale;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 
 /**
  * @author DIOMUN dmq1212@qq.com
@@ -30,7 +29,6 @@ public class RecyclerViewActivity extends BaseActivity {
 
     @Override
     public void initView() {
-        ButterKnife.bind(this);
     }
 
     @Override

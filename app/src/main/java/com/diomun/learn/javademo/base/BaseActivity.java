@@ -19,6 +19,7 @@ import com.diomun.learn.javademo.ui.activity.MainActivity;
 
 import java.util.Objects;
 
+import butterknife.ButterKnife;
 import cat.ereza.customactivityoncrash.CustomActivityOnCrash;
 import cat.ereza.customactivityoncrash.config.CaocConfig;
 
@@ -83,7 +84,9 @@ public abstract class BaseActivity extends AppCompatActivity {
         mContext = this;
         layoutRes = initLayout();
         setContentView(layoutRes);
+        ButterKnife.bind(this);
 
+        // 切勿顛倒 data 和 view 的初始化順序
         initData();
         initView();
 

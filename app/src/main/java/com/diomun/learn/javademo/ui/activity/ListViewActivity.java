@@ -31,8 +31,6 @@ public class ListViewActivity extends BaseActivity {
 
     @Override
     public void initView() {
-        ButterKnife.bind(this);
-
         // 原始Adapter方法
         // SongAdapter mAdapter = new SongAdapter((LinkedList<Song>) songList, mContext);
         // Log.d(TAG, "initView: " + songList.get(0).getsName());
