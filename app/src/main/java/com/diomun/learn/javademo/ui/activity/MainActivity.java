@@ -17,27 +17,25 @@ import android.widget.Toast;
 import com.diomun.learn.javademo.R;
 import com.diomun.learn.javademo.base.BaseActivity;
 import com.diomun.learn.javademo.service.BackService;
+import com.diomun.learn.javademo.util.HttpService;
 
-import org.jetbrains.annotations.NotNull;
-
-import java.io.IOException;
+import java.lang.annotation.Annotation;
+import java.lang.reflect.Type;
 import java.util.List;
 import java.util.Objects;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
-import okhttp3.Call;
-import okhttp3.Callback;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.Response;
+import okhttp3.ResponseBody;
+import retrofit2.Callback;
+import retrofit2.Converter;
+import retrofit2.Retrofit;
 
 /**
  * @author DIOMUN dmq1212@qq.com
  * @date created on 2021/1/21
  */
-public class MainActivity extends BaseActivity implements Callback {
+public class MainActivity extends BaseActivity implements Callback<String> {
     public static final int CMD_STOP_SERVICE = 0;
     @BindView(R.id.btn_dataRequest)
     Button btnDataRequest;
@@ -151,57 +149,24 @@ public class MainActivity extends BaseActivity implements Callback {
             case R.id.btn_dataRequest:
                 Toast.makeText(mContext, "请求数据", Toast.LENGTH_SHORT).show();
 
-                // 使用 OkHttp 请求数据
-                OkHttpClient okHttpClient = new OkHttpClient();
-                Request request = new Request.Builder()
-                        .url("http://songsearch.kugou.com/song_search_v2?keyword=%E7%A7%8B%E6%84%8F%E6%B5%93&page=1&pagesize=10")
-                        .build();
-                Call call = okHttpClient.newCall(request);
-                // Response response = call.execute(); // 同步请求，在Android中不适用（不在主线程进行耗时操作）
-                call.enqueue(this); // 异步请求
+                Retrofit retrofit = new Retrofit.Builder()
+                        // .baseUrl("http://songsearch.kugou.com/song_search_v2?keyword=%E7%A7%8B%E6%84%8F%E6%B5%93&page=1&pagesize=10")
+                        .baseUrl("https://baidu.com")
+                        .addConverterFactory(
+                                new Converter.Factory() {
+                                    @Override
+                                    public Converter<ResponseBody, ?> responseBodyConverter(Type type, Annotation[] annotations, Retrofit retrofit) {
+                                        return (Converter<ResponseBody, String>) ResponseBody::string;
+                                    }
+                                }
+                        ).build();
+                HttpService httpService = retrofit.create(HttpService.class);
+                retrofit2.Call<String> dataStrCall = httpService.getDataStr();
+                dataStrCall.enqueue(this);
 
                 break;
             default:
                 throw new IllegalStateException("Unexpected value: " + view.getId());
-        }
-    }
-
-    /**
-     * OKHttp连接失败
-     *
-     * @param call
-     * @param e
-     */
-    @Override
-    public void onFailure(@NotNull Call call, @NotNull IOException e) {
-        Toast.makeText(mContext, "网络错误", Toast.LENGTH_SHORT).show();
-    }
-
-    /**
-     * OKHttp连接成功
-     *
-     * @param call
-     * @param response
-     * @throws IOException
-     */
-    @Override
-    public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
-        Intent intent2viewTest = new Intent(mContext, ViewTestActivity.class);
-        // Log.d(TAG, "onResponse: " + Thread.currentThread());
-
-        if (response.code() == 200) {
-            String dataStr = Objects.requireNonNull(response.body()).string();
-            Bundle bundle = new Bundle();
-            bundle.putString(getString(R.string.bundleDataKey_httpTest), dataStr);
-
-            intent2viewTest.putExtra(getString(R.string.bundleKey_httpTest), bundle);
-            startActivity(intent2viewTest);
-
-            // handle 通知当前 activity 主线程更新视图
-            Message msg = new Message();
-            msg.what = 0;
-            msg.setData(bundle);
-            // mHandler.sendMessage(msg);
         }
     }
 
@@ -213,6 +178,47 @@ public class MainActivity extends BaseActivity implements Callback {
         } else {
             throw new IllegalStateException("Unexpected value: " + msg.what);
         }
+    }
+
+    /**
+     * 网络请求成功
+     *
+     * @param call
+     * @param response 响应
+     */
+    @Override
+    public void onResponse(retrofit2.Call<String> call, retrofit2.Response<String> response) {
+        Intent intent2viewTest = new Intent(mContext, ViewTestActivity.class);
+
+        if (response.code() == 200) {
+            String dataStr = response.body();
+            Log.d(TAG, "onResponse: " + dataStr);
+
+            Bundle bundle = new Bundle();
+            bundle.putString(getString(R.string.bundleDataKey_httpTest), dataStr);
+
+            intent2viewTest.putExtra(getString(R.string.bundleKey_httpTest), bundle);
+            // startActivity(intent2viewTest);
+
+            // handle 通知当前 activity 主线程更新视图
+            Message msg = new Message();
+            msg.what = 0;
+            msg.setData(bundle);
+            mHandler.sendMessage(msg);
+        }
+    }
+
+
+    /**
+     * 网络请求失败
+     *
+     * @param call
+     * @param t
+     */
+    @Override
+    public void onFailure(retrofit2.Call<String> call, Throwable t) {
+        Toast.makeText(mContext, "网络请求出错" + call.request().url(), Toast.LENGTH_SHORT).show();
+        t.printStackTrace();
     }
 }
 
