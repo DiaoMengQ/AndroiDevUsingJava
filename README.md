@@ -8,3 +8,4 @@
 * [Butter Knife](https://github.com/JakeWharton/butterknife)
 * [Android Image Cropper](https://github.com/ArthurHub/Android-Image-Cropper)
 * [CustomActivityOnCrash](https://github.com/Ereza/CustomActivityOnCrash)
+* [OkHttp](https://github.com/square/okhttp)

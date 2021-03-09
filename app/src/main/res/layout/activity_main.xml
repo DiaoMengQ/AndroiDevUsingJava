@@ -9,97 +9,123 @@
     tools:context=".ui.activity.MainActivity"
     tools:ignore="ContentDescription,HardcodedText">
 
-    <LinearLayout
-        android:layout_width="0dp"
+    <ScrollView
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="16dp"
-        android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:dividerPadding="@dimen/padding_linear"
-            android:orientation="horizontal">
+            android:layout_marginTop="16dp"
+            android:orientation="vertical">
 
-            <Button
-                android:id="@+id/btn_toListView"
-                android:layout_width="0dp"
-                android:layout_height="@dimen/height4btn"
-                android:layout_margin="@dimen/margin_btn"
-                android:layout_weight="1"
-                android:text="打开listVIEW" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:dividerPadding="@dimen/padding_linear"
+                android:orientation="horizontal">
 
-            <Button
-                android:id="@+id/btn_database"
-                android:layout_width="0dp"
-                android:layout_height="@dimen/height4btn"
-                android:layout_margin="@dimen/margin_btn"
-                android:layout_weight="1"
-                android:text="数据库" />
+                <Button
+                    android:id="@+id/btn_toListView"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/height4btn"
+                    android:layout_margin="@dimen/margin_btn"
+                    android:layout_weight="1"
+                    android:text="打开listVIEW" />
+
+                <Button
+                    android:id="@+id/btn_database"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/height4btn"
+                    android:layout_margin="@dimen/margin_btn"
+                    android:layout_weight="1"
+                    android:text="数据库" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/btn_startBackService"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/height4btn"
+                    android:layout_margin="@dimen/margin_btn"
+                    android:layout_weight="1"
+                    android:text="启动服务" />
+
+                <Button
+                    android:id="@+id/btn_unBindBackService"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/height4btn"
+                    android:layout_margin="@dimen/margin_btn"
+                    android:layout_weight="1"
+                    android:text="解绑服务" />
+
+                <Button
+                    android:id="@+id/btn_stopBackService"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/height4btn"
+                    android:layout_margin="@dimen/margin_btn"
+                    android:layout_weight="1"
+                    android:text="停止服务" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/btn_viewBackService"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/height4btn"
+                    android:layout_margin="@dimen/margin_btn"
+                    android:layout_weight="1"
+                    android:text="查看服务状态" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <Button
+                    android:id="@+id/btn_toRecycleView"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/height4btn"
+                    android:layout_margin="@dimen/margin_btn"
+                    android:layout_weight="1"
+                    android:text="打开RecycleView" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/btn_dataRequest"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/height4btn"
+                    android:layout_margin="@dimen/margin_btn"
+                    android:layout_weight="1"
+                    android:text="数据请求" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tv_test"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="TextView" />
+
 
         </LinearLayout>
+    </ScrollView>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <Button
-                android:id="@+id/btn_startBackService"
-                android:layout_width="0dp"
-                android:layout_height="@dimen/height4btn"
-                android:layout_margin="@dimen/margin_btn"
-                android:layout_weight="1"
-                android:text="启动服务" />
-
-            <Button
-                android:id="@+id/btn_unBindBackService"
-                android:layout_width="0dp"
-                android:layout_height="@dimen/height4btn"
-                android:layout_margin="@dimen/margin_btn"
-                android:layout_weight="1"
-                android:text="解绑服务" />
-
-            <Button
-                android:id="@+id/btn_stopBackService"
-                android:layout_width="0dp"
-                android:layout_height="@dimen/height4btn"
-                android:layout_margin="@dimen/margin_btn"
-                android:layout_weight="1"
-                android:text="停止服务" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <Button
-                android:id="@+id/btn_viewBackService"
-                android:layout_width="0dp"
-                android:layout_height="@dimen/height4btn"
-                android:layout_margin="@dimen/margin_btn"
-                android:layout_weight="1"
-                android:text="查看服务状态" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <Button
-                android:layout_width="0dp"
-                android:layout_height="@dimen/height4btn"
-                android:layout_weight="1"
-                android:layout_margin="@dimen/margin_btn"
-                android:text="打开RecycleView"
-                android:id="@+id/btn_toRecycleView"/>
-        </LinearLayout>
-
-    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

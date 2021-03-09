@@ -45,6 +45,7 @@ dependencies {
     implementation 'io.reactivex.rxjava3:rxjava:3.0.9'
     implementation 'cat.ereza:customactivityoncrash:2.3.0'
     implementation 'com.jakewharton:butterknife:10.2.3'
+    implementation 'com.squareup.okhttp3:okhttp:4.9.0'
 
     annotationProcessor 'com.jakewharton:butterknife-compiler:10.2.3'
 
