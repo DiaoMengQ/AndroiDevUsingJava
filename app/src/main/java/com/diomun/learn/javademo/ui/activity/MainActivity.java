@@ -157,8 +157,6 @@ public class MainActivity extends BaseActivity implements Callback {
                 Call call = okHttpClient.newCall(request);
                 // Response response = call.execute(); // 同步请求，在Android中不适用（不在主线程进行耗时操作）
                 call.enqueue(this); // 异步请求
-
-
                 break;
             default:
                 throw new IllegalStateException("Unexpected value: " + view.getId());
@@ -198,9 +196,9 @@ public class MainActivity extends BaseActivity implements Callback {
             startActivity(intent2viewTest);
 
             // handle 通知当前 activity 主线程更新视图
-            // Message msg = new Message();
-            // msg.what = 0;
-            // msg.setData(bundle);
+            Message msg = new Message();
+            msg.what = 0;
+            msg.setData(bundle);
             // mHandler.sendMessage(msg);
         }
     }
