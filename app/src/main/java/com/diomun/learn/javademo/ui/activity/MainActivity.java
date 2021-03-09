@@ -150,6 +150,8 @@ public class MainActivity extends BaseActivity implements Callback {
                 break;
             case R.id.btn_dataRequest:
                 Toast.makeText(mContext, "请求数据", Toast.LENGTH_SHORT).show();
+
+                // 使用 OkHttp 请求数据
                 OkHttpClient okHttpClient = new OkHttpClient();
                 Request request = new Request.Builder()
                         .url("http://songsearch.kugou.com/song_search_v2?keyword=%E7%A7%8B%E6%84%8F%E6%B5%93&page=1&pagesize=10")
@@ -157,15 +159,15 @@ public class MainActivity extends BaseActivity implements Callback {
                 Call call = okHttpClient.newCall(request);
                 // Response response = call.execute(); // 同步请求，在Android中不适用（不在主线程进行耗时操作）
                 call.enqueue(this); // 异步请求
+
                 break;
             default:
                 throw new IllegalStateException("Unexpected value: " + view.getId());
         }
     }
 
-
     /**
-     * 连接失败
+     * OKHttp连接失败
      *
      * @param call
      * @param e
@@ -176,7 +178,7 @@ public class MainActivity extends BaseActivity implements Callback {
     }
 
     /**
-     * 连接成功
+     * OKHttp连接成功
      *
      * @param call
      * @param response
