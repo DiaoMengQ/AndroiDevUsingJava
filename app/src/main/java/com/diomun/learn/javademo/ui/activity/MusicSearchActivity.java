@@ -9,9 +9,11 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.diomun.learn.javademo.R;
+import com.diomun.learn.javademo.adapter.SongRecyclerAdapater;
 import com.diomun.learn.javademo.api.HttpService;
 import com.diomun.learn.javademo.base.BaseActivity;
 import com.diomun.learn.javademo.model.Music.Data;
@@ -33,7 +35,10 @@ import retrofit2.converter.gson.GsonConverterFactory;
  * @date created on 2021/3/10
  * @desc
  */
-public class MusicSearchActivity extends BaseActivity {
+public class MusicSearchActivity extends BaseActivity implements SongRecyclerAdapater.OnChildClickListener {
+    private SongRecyclerAdapater songRecyclerAdapater;
+    private List<Info> songInfoList;
+
     @BindView(R.id.ed_musicSearch)
     TextView edMusicSearch;
     @BindView(R.id.btn_musicSearch)
@@ -55,7 +60,6 @@ public class MusicSearchActivity extends BaseActivity {
 
     @Override
     public void initData() {
-
     }
 
     @OnClick({R.id.ed_musicSearch, R.id.btn_musicSearch})
@@ -70,16 +74,6 @@ public class MusicSearchActivity extends BaseActivity {
                 break;
             default:
                 throw new IllegalStateException("Unexpected value: " + view.getId());
-        }
-    }
-
-    @Override
-    public void handlerMsg(Message msg) {
-        if (msg.what == 0) {
-            Log.d(TAG, "handlerMsg: 更新视图消息");
-            // tvTest.setText(msg.getData().getString(getString(R.string.bundleDataKey_httpTest)));
-        } else {
-            throw new IllegalStateException("Unexpected value: " + msg.what);
         }
     }
 
@@ -102,11 +96,13 @@ public class MusicSearchActivity extends BaseActivity {
                 if (response.code() == 200) {
                     Song songRes = response.body();
                     Data songData = songRes.getData();
-                    List<Info> songList = songData.getInfo();
-                    Log.d(TAG, "onResponse: " + songList.size());
+                    songInfoList = songData.getInfo();
+
+                    Log.d(TAG, "onResponse: " + songInfoList.size());
 
                     String data2show = "";
-                    data2show = songList.get(0).getFilename();
+                    data2show = songInfoList.get(0).getFilename();
+
                     Bundle bundle = new Bundle();
                     bundle.putString(getString(R.string.bundleDataKey_httpTest), data2show);
 
@@ -125,5 +121,26 @@ public class MusicSearchActivity extends BaseActivity {
                 throwable.printStackTrace();
             }
         });
+    }
+
+    @Override
+    public void handlerMsg(Message msg) {
+        if (msg.what == 0) {
+            Log.d(TAG, "handlerMsg: 更新视图消息");
+            // tvTest.setText(msg.getData().getString(getString(R.string.bundleDataKey_httpTest)));
+            songRecyclerAdapater = new SongRecyclerAdapater(this, songInfoList);
+            LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+            rvSearchList.setLayoutManager(linearLayoutManager);
+            rvSearchList.setAdapter(songRecyclerAdapater);
+            songRecyclerAdapater.setOnChildClickListener(this);
+        } else {
+            throw new IllegalStateException("Unexpected value: " + msg.what);
+        }
+    }
+
+    @Override
+    public void onChildClick(RecyclerView parent, View view, int position, Info data) {
+        Log.d(TAG, "onChildClick: 点击事件");
+        Toast.makeText(mContext, data.getInfoStr(), Toast.LENGTH_SHORT).show();
     }
 }

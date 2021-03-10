@@ -1,6 +1,7 @@
 package com.diomun.learn.javademo.adapter;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,64 +15,111 @@ import com.diomun.learn.javademo.model.Music.Info;
 
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+
 /**
  * @author DIOMUN dmq1212@qq.com
  * @date created on 2021/3/10
  * @desc
  */
-public class SongRecyclerAdapater extends RecyclerView.Adapter<SongRecyclerAdapater.MyViewHolder> implements View.OnClickListener {
+public class SongRecyclerAdapater extends RecyclerView.Adapter<SongRecyclerAdapater.searchListHolder> {
     private Context context;
     private List<Info> songInfoList;
     private View view;
-    private String TAG = "RecyclerAdapter";
+    private String TAG = "SongRecyclerAdapater";
     private RecyclerView songRecyclerView;
-    private OnChildClickListener listener;
+    private OnChildClickListener onChildClickListener;
 
-
-    @Override
-    public void onClick(View v) {
-        if (songRecyclerView != null && listener != null) {
-            int position = songRecyclerView.getChildAdapterPosition(v);
-            listener.onChildClick(songRecyclerView, v, position, songInfoList.get(position));
-        }
+    public void setOnChildClickListener(OnChildClickListener listener) {
+        this.onChildClickListener = listener;
     }
 
-    static class MyViewHolder extends RecyclerView.ViewHolder {
-        private final TextView songName;
-        private final TextView singerName;
+    public SongRecyclerAdapater(Context context, List<Info> songInfoList) {
+        this.context = context;
+        this.songInfoList = songInfoList;
+    }
 
-        MyViewHolder(View itemView) {
+    static class searchListHolder extends RecyclerView.ViewHolder {
+        @BindView(R.id.tv_songName)
+        TextView songName;
+        @BindView(R.id.tv_songSinger)
+        TextView singerName;
+
+        searchListHolder(View itemView) {
             super(itemView);
-            songName = itemView.findViewById(R.id.tv_songName);
-            singerName = itemView.findViewById(R.id.tv_songSinger);
+            ButterKnife.bind(this, itemView);
         }
     }
 
     @NonNull
     @Override
-    public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public searchListHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         view = LayoutInflater.from(context).inflate(R.layout.item_recycler_searchlist, parent, false);
-        view.setOnClickListener(this);
-        return new MyViewHolder(view);
+        // view.setOnClickListener(this);
+        return new searchListHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-
+    public void onBindViewHolder(@NonNull searchListHolder holder, int position) {
+        holder.songName.setText(songInfoList.get(position).getSongname());
+        holder.singerName.setText(songInfoList.get(position).getSingername());
     }
 
     @Override
     public int getItemCount() {
-        return 0;
+        return songInfoList.size();
     }
 
-    public interface OnChildClickListener{
+    /**
+     * 点击单个 item 时的接口
+     */
+    public interface OnChildClickListener {
         /**
-         * @param parent RecyclerView 布局
-         * @param view 点击时的视图
+         * @param parent   RecyclerView 布局
+         * @param view     点击时的视图
          * @param position item 位置
-         * @param data item 数据
+         * @param data     item 数据
          */
         void onChildClick(RecyclerView parent, View view, int position, Info data);
+    }
+
+    /**
+     * 对整个视图View的点击相应
+     */
+    @OnClick
+    public void onViewClicked(View view) {
+        if (songRecyclerView != null && onChildClickListener != null) {
+            int position = songRecyclerView.getChildAdapterPosition(view);
+            onChildClickListener.onChildClick(songRecyclerView, view, position, songInfoList.get(position));
+        }
+        else {
+            Log.d(TAG, "onViewClicked: error");
+        }
+    }
+
+    // @Override
+    // public void onClick(View v) {
+    //     if (songRecyclerView != null && listener != null) {
+    //         int position = songRecyclerView.getChildAdapterPosition(v);
+    //         listener.onChildClick(songRecyclerView, v, position, songInfoList.get(position));
+    //     }
+    // }
+
+    /**
+     * 当这个 adapter 被连接到一个 recyclerView 时会被调用
+     */
+    @Override
+    public void onAttachedToRecyclerView(@NonNull RecyclerView recyclerView) {
+        super.onAttachedToRecyclerView(recyclerView);
+        Log.d(TAG, "onAttachedToRecyclerView: adapter 连接 recyclerView");
+        this.songRecyclerView = recyclerView;
+    }
+
+    @Override
+    public void onDetachedFromRecyclerView(@NonNull RecyclerView recyclerView) {
+        super.onDetachedFromRecyclerView(recyclerView);
+        this.songRecyclerView = null;
     }
 }
