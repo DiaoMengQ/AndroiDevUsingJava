@@ -39,7 +39,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
  */
 public class MainActivity extends BaseActivity {
     public static final int CMD_STOP_SERVICE = 0;
-    @BindView(R.id.btn_dataRequest)
+    @BindView(R.id.btn_musicSearch)
     Button btnDataRequest;
     @BindView(R.id.tv_test)
     TextView tvTest;
@@ -101,7 +101,7 @@ public class MainActivity extends BaseActivity {
             R.id.btn_viewBackService,
             R.id.btn_unBindBackService,
             R.id.btn_toRecycleView,
-            R.id.btn_dataRequest})
+            R.id.btn_musicSearch})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.btn_toRecycleView:
@@ -148,52 +148,9 @@ public class MainActivity extends BaseActivity {
                     }
                 }
                 break;
-            case R.id.btn_dataRequest:
-                Toast.makeText(mContext, "请求数据", Toast.LENGTH_SHORT).show();
-
-                Retrofit retrofit = new Retrofit.Builder()
-                        .baseUrl("http://mobilecdn.kugou.com/") // 注意根目录最后不带‘/’
-                        .addConverterFactory(GsonConverterFactory.create())
-                        .build();
-                HttpService httpService = retrofit.create(HttpService.class);
-                Call<Song> dataCall = httpService.getMusicData("/api/v3/search/song", "秋意浓", "1", "10");
-                // Call<ReqKey> dataCall = httpService.getToken();
-
-                dataCall.enqueue(new Callback<Song>() {
-                    @Override
-                    public void onResponse(Call<Song> call, Response<Song> response) {
-                        // Intent intent2viewTest = new Intent(mContext, ViewTestActivity.class);
-                        // intent2viewTest.putExtra(getString(R.string.bundleKey_httpTest), bundle);
-                        // startActivity(intent2viewTest);
-
-                        if (response.code() == 200) {
-                            Song songRes = response.body();
-                            Data songData = songRes.getData();
-                            List<Info> songList = songData.getInfo();
-                            Log.d(TAG, "onResponse: " + songList.size());
-
-                            String data2show = "";
-                            data2show = songList.get(0).getFilename();
-                            Bundle bundle = new Bundle();
-                            bundle.putString(getString(R.string.bundleDataKey_httpTest), data2show);
-
-                            // handle 通知当前 activity 主线程更新视图
-                            Message msg = new Message();
-                            msg.what = 0;
-                            msg.setData(bundle);
-                            mHandler.sendMessage(msg);
-                        } else {
-                            Log.e(TAG, "onResponse: " + response.code());
-                        }
-                    }
-
-                    @Override
-                    public void onFailure(Call<Song> call, Throwable throwable) {
-                        throwable.printStackTrace();
-
-                    }
-                });
-
+            case R.id.btn_musicSearch:
+                Intent intent2musicSearch = new Intent(mContext, MusicSearchActivity.class);
+                startActivity(intent2musicSearch);
                 break;
             default:
                 throw new IllegalStateException("Unexpected value: " + view.getId());

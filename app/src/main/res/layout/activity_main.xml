@@ -110,12 +110,12 @@
                 android:orientation="horizontal">
 
                 <Button
-                    android:id="@+id/btn_dataRequest"
+                    android:id="@+id/btn_musicSearch"
                     android:layout_width="0dp"
                     android:layout_height="@dimen/height4btn"
                     android:layout_margin="@dimen/margin_btn"
                     android:layout_weight="1"
-                    android:text="数据请求" />
+                    android:text="音乐搜索" />
             </LinearLayout>
 
             <TextView
@@ -123,8 +123,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="TextView" />
-
-
         </LinearLayout>
     </ScrollView>
 

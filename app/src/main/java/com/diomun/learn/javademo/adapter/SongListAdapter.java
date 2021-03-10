@@ -21,11 +21,11 @@ import butterknife.ButterKnife;
  * @date created on 2021/3/6
  * @desc 歌曲展示 ListView 适配器
  */
-public class SongAdapter extends BaseAdapter {
+public class SongListAdapter extends BaseAdapter {
     private LinkedList<Song> songData;
     private Context mContext;
 
-    public SongAdapter(LinkedList<Song> songData, Context context) {
+    public SongListAdapter(LinkedList<Song> songData, Context context) {
         this.songData = songData;
         this.mContext = context;
     }
