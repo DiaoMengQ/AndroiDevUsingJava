@@ -15,27 +15,29 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.diomun.learn.javademo.R;
+import com.diomun.learn.javademo.api.HttpService;
 import com.diomun.learn.javademo.base.BaseActivity;
+import com.diomun.learn.javademo.model.Music.Data;
+import com.diomun.learn.javademo.model.Music.Info;
+import com.diomun.learn.javademo.model.Music.Song;
 import com.diomun.learn.javademo.service.BackService;
-import com.diomun.learn.javademo.util.HttpService;
 
-import java.lang.annotation.Annotation;
-import java.lang.reflect.Type;
 import java.util.List;
 import java.util.Objects;
 
 import butterknife.BindView;
 import butterknife.OnClick;
-import okhttp3.ResponseBody;
+import retrofit2.Call;
 import retrofit2.Callback;
-import retrofit2.Converter;
+import retrofit2.Response;
 import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
  * @author DIOMUN dmq1212@qq.com
  * @date created on 2021/1/21
  */
-public class MainActivity extends BaseActivity implements Callback<String> {
+public class MainActivity extends BaseActivity {
     public static final int CMD_STOP_SERVICE = 0;
     @BindView(R.id.btn_dataRequest)
     Button btnDataRequest;
@@ -150,19 +152,47 @@ public class MainActivity extends BaseActivity implements Callback<String> {
                 Toast.makeText(mContext, "请求数据", Toast.LENGTH_SHORT).show();
 
                 Retrofit retrofit = new Retrofit.Builder()
-                        // .baseUrl("http://songsearch.kugou.com/song_search_v2?keyword=%E7%A7%8B%E6%84%8F%E6%B5%93&page=1&pagesize=10")
-                        .baseUrl("https://baidu.com")
-                        .addConverterFactory(
-                                new Converter.Factory() {
-                                    @Override
-                                    public Converter<ResponseBody, ?> responseBodyConverter(Type type, Annotation[] annotations, Retrofit retrofit) {
-                                        return (Converter<ResponseBody, String>) ResponseBody::string;
-                                    }
-                                }
-                        ).build();
+                        .baseUrl("http://mobilecdn.kugou.com/") // 注意根目录最后不带‘/’
+                        .addConverterFactory(GsonConverterFactory.create())
+                        .build();
                 HttpService httpService = retrofit.create(HttpService.class);
-                retrofit2.Call<String> dataStrCall = httpService.getDataStr();
-                dataStrCall.enqueue(this);
+                Call<Song> dataCall = httpService.getMusicData("/api/v3/search/song", "秋意浓", "1", "10");
+                // Call<ReqKey> dataCall = httpService.getToken();
+
+                dataCall.enqueue(new Callback<Song>() {
+                    @Override
+                    public void onResponse(Call<Song> call, Response<Song> response) {
+                        // Intent intent2viewTest = new Intent(mContext, ViewTestActivity.class);
+                        // intent2viewTest.putExtra(getString(R.string.bundleKey_httpTest), bundle);
+                        // startActivity(intent2viewTest);
+
+                        if (response.code() == 200) {
+                            Song songRes = response.body();
+                            Data songData = songRes.getData();
+                            List<Info> songList = songData.getInfo();
+                            Log.d(TAG, "onResponse: " + songList.size());
+
+                            String data2show = "";
+                            data2show = songList.get(0).getFilename();
+                            Bundle bundle = new Bundle();
+                            bundle.putString(getString(R.string.bundleDataKey_httpTest), data2show);
+
+                            // handle 通知当前 activity 主线程更新视图
+                            Message msg = new Message();
+                            msg.what = 0;
+                            msg.setData(bundle);
+                            mHandler.sendMessage(msg);
+                        } else {
+                            Log.e(TAG, "onResponse: " + response.code());
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<Song> call, Throwable throwable) {
+                        throwable.printStackTrace();
+
+                    }
+                });
 
                 break;
             default:
@@ -178,47 +208,6 @@ public class MainActivity extends BaseActivity implements Callback<String> {
         } else {
             throw new IllegalStateException("Unexpected value: " + msg.what);
         }
-    }
-
-    /**
-     * 网络请求成功
-     *
-     * @param call
-     * @param response 响应
-     */
-    @Override
-    public void onResponse(retrofit2.Call<String> call, retrofit2.Response<String> response) {
-        Intent intent2viewTest = new Intent(mContext, ViewTestActivity.class);
-
-        if (response.code() == 200) {
-            String dataStr = response.body();
-            Log.d(TAG, "onResponse: " + dataStr);
-
-            Bundle bundle = new Bundle();
-            bundle.putString(getString(R.string.bundleDataKey_httpTest), dataStr);
-
-            intent2viewTest.putExtra(getString(R.string.bundleKey_httpTest), bundle);
-            // startActivity(intent2viewTest);
-
-            // handle 通知当前 activity 主线程更新视图
-            Message msg = new Message();
-            msg.what = 0;
-            msg.setData(bundle);
-            mHandler.sendMessage(msg);
-        }
-    }
-
-
-    /**
-     * 网络请求失败
-     *
-     * @param call
-     * @param t
-     */
-    @Override
-    public void onFailure(retrofit2.Call<String> call, Throwable t) {
-        Toast.makeText(mContext, "网络请求出错" + call.request().url(), Toast.LENGTH_SHORT).show();
-        t.printStackTrace();
     }
 }
 

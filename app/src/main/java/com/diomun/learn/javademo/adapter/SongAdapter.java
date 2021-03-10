@@ -8,7 +8,7 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.diomun.learn.javademo.R;
-import com.diomun.learn.javademo.model.Song;
+import com.diomun.learn.javademo.model.Music.Song;
 import com.diomun.learn.javademo.ui.customview.RoundImageView;
 
 import java.util.LinkedList;
@@ -56,9 +56,9 @@ public class SongAdapter extends BaseAdapter {
             convertView.setTag(mHolder);
         }
         // mHolder.imgVSongAlbum.setImageDrawable(songData.get(position).getsAlbumUrl());
-        mHolder.imgVSongAlbum.setImageResource(R.mipmap.heiyu);
-        mHolder.tvSongSinger.setText(songData.get(position).getsSinger());
-        mHolder.tvSongName.setText(songData.get(position).getsName());
+        // mHolder.imgVSongAlbum.setImageResource(R.mipmap.heiyu);
+        // mHolder.tvSongSinger.setText(songData.get(position).getsSinger());
+        // mHolder.tvSongName.setText(songData.get(position).getsName());
 
         return convertView;
     }

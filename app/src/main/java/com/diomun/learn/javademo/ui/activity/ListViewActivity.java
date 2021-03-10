@@ -5,7 +5,7 @@ import android.widget.ListView;
 import com.diomun.learn.javademo.R;
 import com.diomun.learn.javademo.base.BaseActivity;
 import com.diomun.learn.javademo.base.MyListAdapter;
-import com.diomun.learn.javademo.model.Song;
+import com.diomun.learn.javademo.model.Music.Song;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -42,7 +42,7 @@ public class ListViewActivity extends BaseActivity {
         songList = new LinkedList<>();
         for (int i = 0; i < 20; i++) {
             String str = String.valueOf(i);
-            songList.add(new Song(str, str, str));
+            // songList.add(new Song(str, str, str));
         }
 
         // 使用自定义 MyBaseAdapter
@@ -51,9 +51,9 @@ public class ListViewActivity extends BaseActivity {
             // 完成原本自定义Adapter类中的功能(SongAdapter)
             @Override
             protected void bindView(ViewHolder holder, Song obj) {
-                holder.setImageResource(R.id.imgV_songAlbum, R.mipmap.heiyu);
-                holder.setText(R.id.tv_songName, obj.getsName());
-                holder.setText(R.id.tv_songSinger, obj.getsSinger());
+                // holder.setImageResource(R.id.imgV_songAlbum, R.mipmap.heiyu);
+                // holder.setText(R.id.tv_songName, obj.getsName());
+                // holder.setText(R.id.tv_songSinger, obj.getsSinger());
             }
         };
 
