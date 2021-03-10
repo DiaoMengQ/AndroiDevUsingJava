@@ -93,7 +93,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
         }
     }
 
-    public interface OnChildClickListener{
+    private interface OnChildClickListener{
         /**
          * @param parent RecyclerView 布局
          * @param view 点击时的视图

@@ -25,14 +25,14 @@ public class SongRecyclerAdapater extends RecyclerView.Adapter<SongRecyclerAdapa
     private View view;
     private String TAG = "RecyclerAdapter";
     private RecyclerView songRecyclerView;
-    private RecyclerAdapter.OnChildClickListener listener;
+    private OnChildClickListener listener;
 
 
     @Override
     public void onClick(View v) {
-        if (recyclerView != null && listener != null) {
-            int position = recyclerView.getChildAdapterPosition(v);
-            listener.onChildClick(recyclerView, v, position, songInfoList.get(position));
+        if (songRecyclerView != null && listener != null) {
+            int position = songRecyclerView.getChildAdapterPosition(v);
+            listener.onChildClick(songRecyclerView, v, position, songInfoList.get(position));
         }
     }
 
@@ -63,5 +63,15 @@ public class SongRecyclerAdapater extends RecyclerView.Adapter<SongRecyclerAdapa
     @Override
     public int getItemCount() {
         return 0;
+    }
+
+    private interface OnChildClickListener{
+        /**
+         * @param parent RecyclerView 布局
+         * @param view 点击时的视图
+         * @param position item 位置
+         * @param data item 数据
+         */
+        void onChildClick(RecyclerView parent, View view, int position, Info data);
     }
 }
