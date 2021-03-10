@@ -65,7 +65,7 @@ public class SongRecyclerAdapater extends RecyclerView.Adapter<SongRecyclerAdapa
         return 0;
     }
 
-    private interface OnChildClickListener{
+    public interface OnChildClickListener{
         /**
          * @param parent RecyclerView 布局
          * @param view 点击时的视图
