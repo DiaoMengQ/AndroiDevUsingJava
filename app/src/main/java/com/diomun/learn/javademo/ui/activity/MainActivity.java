@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 import com.diomun.learn.javademo.R;
 import com.diomun.learn.javademo.base.BaseActivity;
+import com.diomun.learn.javademo.base.BaseService;
 import com.diomun.learn.javademo.service.BackService;
 
 import java.util.List;
@@ -131,10 +132,11 @@ public class MainActivity extends BaseActivity {
             case R.id.btn_stopBackService:
                 Toast.makeText(mContext, "停止服务", Toast.LENGTH_SHORT).show();
                 // 发送停止服务广播
-                Intent intent2stopServ = new Intent();
+                Intent intent2stopServ = new Intent(this, BackService.class);
                 intent2stopServ.setAction(getString(R.string.action_stopBackService));
                 intent2stopServ.putExtra("cmd", CMD_STOP_SERVICE);
                 sendBroadcast(intent2stopServ);
+                // stopService(intent2stopServ);
                 break;
             case R.id.btn_unBindBackService:
                 Toast.makeText(mContext, "解绑服务", Toast.LENGTH_SHORT).show();

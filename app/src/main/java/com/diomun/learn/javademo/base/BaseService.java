@@ -31,7 +31,7 @@ public abstract class BaseService extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        Log.d(TAG, "onStartCommand: ");
+        Log.d(TAG, "onStartCommand: -------------------服务启动");
         return super.onStartCommand(intent, flags, startId);
     }
 

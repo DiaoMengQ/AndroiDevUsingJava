@@ -25,7 +25,7 @@ import java.util.concurrent.TimeUnit;
  * @date created on 2021/2/23
  */
 public class BackService extends BaseService {
-    CommandReceiver cmdReceiver;
+    private CommandReceiver cmdReceiver;
     private boolean flag;
 
     @Nullable
@@ -57,13 +57,12 @@ public class BackService extends BaseService {
 
     private void startTask() {
         IntentFilter intentFilter = new IntentFilter();
+        Log.d(TAG, "startTask: action value " + getString(R.string.action_stopBackService));
         intentFilter.addAction(getString(R.string.action_stopBackService));
         registerReceiver(cmdReceiver, intentFilter);
 
-        Log.d(TAG, "startTask: ");
         // 线程工厂，可以对每个线程进行单独处理，如设定线程的标识符
         final ThreadFactory ScheduledTF = r -> {
-            Log.d(TAG, "run: test ThreadFactory");
             Thread scheduledThread = new Thread(r, "Scheduled-task"); // 这是对r的处理，别忘了把原本的 r 传进去！
             return scheduledThread;
         };
@@ -79,6 +78,7 @@ public class BackService extends BaseService {
         @Override
         public void onReceive(Context context, Intent intent) {
             int cmd = intent.getIntExtra("cmd", -1);
+            Log.d(TAG, "onReceive: 接收广播参数" + cmd);
             if (cmd == MainActivity.CMD_STOP_SERVICE) { //如果等于0
                 // TODO: 问题:停止服务后线程仍继续运行
                 stopSelf(); // 停止服务
@@ -92,6 +92,7 @@ public class BackService extends BaseService {
         // 因为是服务开启的广播，所以当服务被关闭时同时清除广播
         unregisterReceiver(cmdReceiver);
         Log.d(TAG, "onDestroy: 清除广播注册");
+        stopSelf();
     }
 
 }
