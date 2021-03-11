@@ -13,9 +13,10 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.diomun.learn.javademo.R;
-import com.diomun.learn.javademo.adapter.SongRecyclerAdapater;
+import com.diomun.learn.javademo.adapter.SongRecyclerAdapterNew;
 import com.diomun.learn.javademo.api.HttpService;
 import com.diomun.learn.javademo.base.BaseActivity;
+import com.diomun.learn.javademo.base.BaseRecyclerAdapater;
 import com.diomun.learn.javademo.model.Music.Data;
 import com.diomun.learn.javademo.model.Music.Info;
 import com.diomun.learn.javademo.model.Music.Song;
@@ -35,8 +36,8 @@ import retrofit2.converter.gson.GsonConverterFactory;
  * @date created on 2021/3/10
  * @desc
  */
-public class MusicSearchActivity extends BaseActivity implements SongRecyclerAdapater.OnChildClickListener {
-    private SongRecyclerAdapater songRecyclerAdapater;
+public class MusicSearchActivity extends BaseActivity {
+    private SongRecyclerAdapterNew songRecyclerAdapater;
     private List<Info> songInfoList;
 
     @BindView(R.id.ed_musicSearch)
@@ -55,7 +56,6 @@ public class MusicSearchActivity extends BaseActivity implements SongRecyclerAda
 
     @Override
     public void initView() {
-
     }
 
     @Override
@@ -98,7 +98,7 @@ public class MusicSearchActivity extends BaseActivity implements SongRecyclerAda
                     Data songData = songRes.getData();
                     songInfoList = songData.getInfo();
 
-                    Log.d(TAG, "onResponse: " + songInfoList.size());
+                    Log.d(TAG, "onResponse: 数据量：" + songInfoList.size());
 
                     String data2show = "";
                     data2show = songInfoList.get(0).getFilename();
@@ -126,21 +126,19 @@ public class MusicSearchActivity extends BaseActivity implements SongRecyclerAda
     @Override
     public void handlerMsg(Message msg) {
         if (msg.what == 0) {
-            Log.d(TAG, "handlerMsg: 更新视图消息");
-            // tvTest.setText(msg.getData().getString(getString(R.string.bundleDataKey_httpTest)));
-            songRecyclerAdapater = new SongRecyclerAdapater(this, songInfoList);
+            Log.d(TAG, "handlerMsg: 更新视图");
+            songRecyclerAdapater = new SongRecyclerAdapterNew(this, songInfoList);
             LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
             rvSearchList.setLayoutManager(linearLayoutManager);
             rvSearchList.setAdapter(songRecyclerAdapater);
-            songRecyclerAdapater.setOnChildClickListener(this);
+            songRecyclerAdapater.setOnItemClickListener(onItemClickListener);
+
         } else {
             throw new IllegalStateException("Unexpected value: " + msg.what);
         }
     }
 
-    @Override
-    public void onChildClick(RecyclerView parent, View view, int position, Info data) {
-        Log.d(TAG, "onChildClick: 点击事件");
+    BaseRecyclerAdapater.OnItemClickListener<Info> onItemClickListener = (parent, view, position, data) -> {
         Toast.makeText(mContext, data.getInfoStr(), Toast.LENGTH_SHORT).show();
-    }
+    };
 }
