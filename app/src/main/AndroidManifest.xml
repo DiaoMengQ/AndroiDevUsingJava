@@ -58,7 +58,12 @@
             android:launchMode="singleTask" />
 
         <!--    后台服务   -->
-        <service android:name=".service.BackService" />
+        <service android:name=".service.BackService"
+            android:permission="android.permission.WAKE_LOCK">
+            <intent-filter>
+                <action android:name="SIMPLE.SERVICE.BACKSERVICE"/>
+            </intent-filter>
+        </service>
 
     </application>
 

@@ -24,7 +24,7 @@
     <string name="customactivityoncrash_error_activity_error_details_clipboard_label">错误信息</string>
 
     <!--  Action Key  -->
-    <string name="action_stopBackService">AAAAA</string>
+    <string name="action_stopBackService">SIMPLE.SERVICE.BACKSERVICE</string>
     <string name="bundleKey_httpTest">bun</string>
     <string name="bundleDataKey_httpTest">data</string>
 

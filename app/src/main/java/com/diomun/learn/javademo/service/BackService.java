@@ -26,7 +26,6 @@ import java.util.concurrent.TimeUnit;
  */
 public class BackService extends BaseService {
     private CommandReceiver cmdReceiver;
-    private boolean flag;
 
     @Nullable
     @Override
@@ -56,10 +55,9 @@ public class BackService extends BaseService {
     }
 
     private void startTask() {
-        IntentFilter intentFilter = new IntentFilter();
-        Log.d(TAG, "startTask: action value " + getString(R.string.action_stopBackService));
-        intentFilter.addAction(getString(R.string.action_stopBackService));
-        registerReceiver(cmdReceiver, intentFilter);
+        // IntentFilter intentFilter = new IntentFilter();
+        // intentFilter.addAction(getString(R.string.action_stopBackService));
+        // registerReceiver(cmdReceiver, intentFilter);
 
         // 线程工厂，可以对每个线程进行单独处理，如设定线程的标识符
         final ThreadFactory ScheduledTF = r -> {
@@ -90,9 +88,8 @@ public class BackService extends BaseService {
     public void onDestroy() {
         super.onDestroy();
         // 因为是服务开启的广播，所以当服务被关闭时同时清除广播
-        unregisterReceiver(cmdReceiver);
-        Log.d(TAG, "onDestroy: 清除广播注册");
-        stopSelf();
+        // unregisterReceiver(cmdReceiver);
+        // Log.d(TAG, "onDestroy: 清除广播注册");
     }
 
 }
