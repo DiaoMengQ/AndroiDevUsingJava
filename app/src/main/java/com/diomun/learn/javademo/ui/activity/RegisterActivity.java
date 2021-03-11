@@ -94,9 +94,12 @@ public class RegisterActivity extends BaseActivity {
         }
     }
 
-    @OnClick({R.id.iv_headImg, R.id.btn_register})
+    @OnClick({R.id.iv_headImg, R.id.btn_register, R.id.ic_back})
     public void onViewClicked(View view) {
         switch (view.getId()) {
+            case R.id.ic_back:
+                onBackPressed();
+                break;
             case R.id.iv_headImg:
                 // 调用选图裁切页
                 CropImage.activity()
@@ -113,4 +116,5 @@ public class RegisterActivity extends BaseActivity {
                 throw new IllegalStateException("Unexpected value: " + view.getId());
         }
     }
+
 }
