@@ -34,7 +34,7 @@
                     android:layout_height="@dimen/height4btn"
                     android:layout_margin="@dimen/margin_btn"
                     android:layout_weight="1"
-                    android:text="打开listVIEW" />
+                    android:text="ListVIEW" />
 
                 <Button
                     android:id="@+id/btn_database"
@@ -42,8 +42,31 @@
                     android:layout_height="@dimen/height4btn"
                     android:layout_margin="@dimen/margin_btn"
                     android:layout_weight="1"
-                    android:text="数据库" />
+                    android:clickable="false"
+                    android:text="数据库（未完成）" />
 
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/btn_login"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/height4btn"
+                    android:layout_margin="@dimen/margin_btn"
+                    android:layout_weight="1"
+                    android:text="登录界面" />
+
+                <Button
+                    android:id="@+id/btn_register"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/height4btn"
+                    android:layout_margin="@dimen/margin_btn"
+                    android:layout_weight="1"
+                    android:text="注册界面" />
             </LinearLayout>
 
             <LinearLayout
@@ -101,7 +124,7 @@
                     android:layout_height="@dimen/height4btn"
                     android:layout_margin="@dimen/margin_btn"
                     android:layout_weight="1"
-                    android:text="打开RecycleView" />
+                    android:text="RecycleView 瀑布流" />
             </LinearLayout>
 
             <LinearLayout
@@ -122,7 +145,8 @@
                 android:id="@+id/tv_test"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="TextView" />
+                android:text="TextView"
+                android:visibility="gone" />
         </LinearLayout>
     </ScrollView>
 

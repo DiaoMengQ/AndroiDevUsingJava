@@ -19,17 +19,17 @@
         <activity
             android:name="com.diomun.learn.javademo.ui.activity.MainActivity"
             android:launchMode="singleTask">
-            <!--            <intent-filter>-->
-            <!--                <action android:name="android.intent.action.MAIN" />-->
-            <!--                <category android:name="android.intent.category.LAUNCHER" />-->
-            <!--            </intent-filter>-->
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
 
         <!-- 登录页 -->
-        <activity android:name="com.diomun.learn.javademo.ui.activity.LoginActivity"></activity>
+        <activity android:name="com.diomun.learn.javademo.ui.activity.LoginActivity" />
 
         <!-- 启动页 -->
-        <activity android:name="com.diomun.learn.javademo.ui.activity.SplashActivity"></activity>
+        <activity android:name="com.diomun.learn.javademo.ui.activity.SplashActivity" />
 
         <!-- 注册页 -->
         <activity android:name=".ui.activity.RegisterActivity"></activity>
@@ -37,7 +37,7 @@
         <!-- 数据库管理页 -->
         <activity
             android:name=".ui.activity.DBManagerActivity"
-            android:launchMode="singleTask"></activity>
+            android:launchMode="singleTask" />
 
         <!-- 为图片裁剪界面单独设置属性 （此处因默认主题设置了no action bar，故更换主题）-->
         <activity
@@ -53,12 +53,9 @@
         <activity android:name=".ui.activity.ListViewActivity" />
 
         <!--    音乐搜索页    -->
-        <activity android:name=".ui.activity.MusicSearchActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+        <activity
+            android:name=".ui.activity.MusicSearchActivity"
+            android:launchMode="singleTask" />
 
         <!--    后台服务   -->
         <service android:name=".service.BackService" />

@@ -5,7 +5,6 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
-import android.os.Bundle;
 import android.os.IBinder;
 import android.os.Message;
 import android.util.Log;
@@ -15,11 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.diomun.learn.javademo.R;
-import com.diomun.learn.javademo.api.HttpService;
 import com.diomun.learn.javademo.base.BaseActivity;
-import com.diomun.learn.javademo.model.Music.Data;
-import com.diomun.learn.javademo.model.Music.Info;
-import com.diomun.learn.javademo.model.Music.Song;
 import com.diomun.learn.javademo.service.BackService;
 
 import java.util.List;
@@ -27,11 +22,6 @@ import java.util.Objects;
 
 import butterknife.BindView;
 import butterknife.OnClick;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
  * @author DIOMUN dmq1212@qq.com
@@ -43,9 +33,8 @@ public class MainActivity extends BaseActivity {
     Button btnDataRequest;
     @BindView(R.id.tv_test)
     TextView tvTest;
-    private Intent intent2backServ;
-    private ServiceConnection servConn;
-
+    @BindView(R.id.btn_login)
+    Button btnLogin;
     @BindView(R.id.btn_toListView)
     Button btnToListView;
     @BindView(R.id.btn_database)
@@ -60,6 +49,11 @@ public class MainActivity extends BaseActivity {
     Button btnUnBindBackService;
     @BindView(R.id.btn_toRecycleView)
     Button btnToRecycleView;
+    @BindView(R.id.btn_register)
+    Button btnRegister;
+
+    private Intent intent2backServ;
+    private ServiceConnection servConn;
 
     @Override
     public int initLayout() {
@@ -101,23 +95,33 @@ public class MainActivity extends BaseActivity {
             R.id.btn_viewBackService,
             R.id.btn_unBindBackService,
             R.id.btn_toRecycleView,
-            R.id.btn_musicSearch})
+            R.id.btn_musicSearch,
+            R.id.btn_login,
+            R.id.btn_register})
     public void onViewClicked(View view) {
         switch (view.getId()) {
+            case R.id.btn_register:
+                Intent intent2register = new Intent(this, RegisterActivity.class);
+                startActivity(intent2register);
+                break;
+            case R.id.btn_login:
+                Intent intent2Login = new Intent(this, LoginActivity.class);
+                startActivity(intent2Login);
+                break;
             case R.id.btn_toRecycleView:
-                Toast.makeText(mContext, "btn_toRecycleView", Toast.LENGTH_SHORT).show();
+                Toast.makeText(mContext, "RecycleView", Toast.LENGTH_SHORT).show();
                 Intent intent2Recycler = new Intent(this, RecyclerViewActivity.class);
                 startActivity(intent2Recycler);
                 break;
             case R.id.btn_toListView:
-                Toast.makeText(mContext, "點擊btn_toListView", Toast.LENGTH_SHORT).show();
+                Toast.makeText(mContext, "ListView", Toast.LENGTH_SHORT).show();
                 Intent intent2ListView = new Intent(this, ListViewActivity.class);
                 startActivity(intent2ListView);
                 break;
             case R.id.btn_database:
                 Toast.makeText(mContext, "数据库管理页", Toast.LENGTH_SHORT).show();
                 Intent intent2DBManager = new Intent(this, DBManagerActivity.class);
-                startActivity(intent2DBManager);
+                // startActivity(intent2DBManager);
                 break;
             case R.id.btn_startBackService:
                 Toast.makeText(mContext, "开启服务", Toast.LENGTH_SHORT).show();
