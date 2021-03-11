@@ -16,10 +16,9 @@ import java.util.List;
  * @desc
  */
 public abstract class BaseRecyclerAdapater<T> extends RecyclerView.Adapter<BaseViewHolder> {
-    Context mContext;
-    List<T> mList;
-    RecyclerView mRecyclerView;
-    Object mData;
+    private Context mContext;
+    private List<T> mList;
+    private RecyclerView mRecyclerView;
     private OnItemClickListener mOnItemClickListener;
 
     public BaseRecyclerAdapater(Context mContext, List<T> mList) {
@@ -41,11 +40,11 @@ public abstract class BaseRecyclerAdapater<T> extends RecyclerView.Adapter<BaseV
             public void onClick(View v) {
                 //这个地方一定要判断 Listener，否则当没有注册点击事件的时候，点击Item的时候报错
                 if (v != null && mOnItemClickListener != null) {
-                    mOnItemClickListener.onItemClick(mRecyclerView, v, position, mData);
+                    mOnItemClickListener.onItemClick(mRecyclerView, v, position, mList.get(position));
                 }
             }
         });
-        covert(holder, mList.get(position), position);
+        // covert(holder, mList.get(position), position);
     }
 
     @Override
