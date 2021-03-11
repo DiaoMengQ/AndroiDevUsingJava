@@ -1,11 +1,12 @@
 package com.diomun.learn.javademo.ui.activity;
 
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.diomun.learn.javademo.R;
 import com.diomun.learn.javademo.base.BaseActivity;
 import com.diomun.learn.javademo.base.MyListAdapter;
-import com.diomun.learn.javademo.model.Music.Song;
+import com.diomun.learn.javademo.model.TestData;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -15,13 +16,13 @@ import butterknife.BindView;
 /**
  * @author DIOMUN dmq1212@qq.com
  * @date created on 2021/3/5
- * @desc
+ * @desc 简单 ListView 的实现
  */
 public class ListViewActivity extends BaseActivity {
     @BindView(R.id.lv_song)
     ListView lvSong;
-    private List<Song> songList = null;
-    private MyListAdapter<Song> mAdapter = null;
+    private List<TestData> dataList = null;
+    private MyListAdapter<TestData> mAdapter = null;
 
     @Override
     public int initLayout() {
@@ -30,32 +31,29 @@ public class ListViewActivity extends BaseActivity {
 
     @Override
     public void initView() {
-        // 原始Adapter方法
-        // SongAdapter mAdapter = new SongAdapter((LinkedList<Song>) songList, mContext);
-        // Log.d(TAG, "initView: " + songList.get(0).getsName());
-
+        // SongListAdapter mAdapter = new SongAdapter((LinkedList<TestData>) dataList, mContext); // 原始Adapter方法
         lvSong.setAdapter(mAdapter);
     }
 
     @Override
     public void initData() {
-        songList = new LinkedList<>();
+        dataList = new LinkedList<>();
         for (int i = 0; i < 20; i++) {
             String str = String.valueOf(i);
-            // songList.add(new Song(str, str, str));
+            dataList.add(new TestData(str, str));
         }
 
         // 使用自定义 MyBaseAdapter
-        mAdapter = new MyListAdapter<Song>((LinkedList<Song>) songList, R.layout.item_list_song) {
-
-            // 完成原本自定义Adapter类中的功能(SongAdapter)
+        mAdapter = new MyListAdapter<TestData>((LinkedList<TestData>) dataList, R.layout.item_list_testdata) {
             @Override
-            protected void bindView(ViewHolder holder, Song obj) {
-                // holder.setImageResource(R.id.imgV_songAlbum, R.mipmap.heiyu);
-                // holder.setText(R.id.tv_songName, obj.getsName());
-                // holder.setText(R.id.tv_songSinger, obj.getsSinger());
+            protected void bindView(ViewHolder holder, TestData obj) {
+                holder.setImageResource(R.id.imgV_songAlbum, R.mipmap.heiyu);
+                holder.setText(R.id.tv_songName, obj.getTitle());
+                holder.setText(R.id.tv_songSinger, obj.getDetail());
+                holder.setOnClickListener(R.id.layout_item,
+                        v -> Toast.makeText(mContext,
+                                "Title: " + obj.getTitle() + "\nDetail: " + obj.getDetail(), Toast.LENGTH_SHORT).show());
             }
         };
-
     }
 }
