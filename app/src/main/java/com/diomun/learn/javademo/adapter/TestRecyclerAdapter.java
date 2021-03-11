@@ -19,7 +19,7 @@ import java.util.List;
  * @date created on 2021/3/5
  * @desc 测试文字数据 RecycleView 适配器
  */
-public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyViewHolder> implements View.OnClickListener {
+public class TestRecyclerAdapter extends RecyclerView.Adapter<TestRecyclerAdapter.MyViewHolder> implements View.OnClickListener {
     private Context context;
     private List<String> list;
     private View view;
@@ -31,7 +31,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
         this.listener = listener;
     }
 
-    public RecyclerAdapter(Context context, List<String> list) {
+    public TestRecyclerAdapter(Context context, List<String> list) {
         this.context = context;
         this.list = list;
     }

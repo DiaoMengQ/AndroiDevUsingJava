@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import com.diomun.learn.javademo.R;
-import com.diomun.learn.javademo.adapter.RecyclerAdapter;
+import com.diomun.learn.javademo.adapter.TestRecyclerAdapter;
 import com.diomun.learn.javademo.base.BaseActivity;
 
 import java.util.ArrayList;
@@ -23,10 +23,10 @@ import butterknife.BindView;
  * @date created on 2021/3/4
  * @desc
  */
-public class RecyclerViewActivity extends BaseActivity implements RecyclerAdapter.OnChildClickListener {
+public class RecyclerViewActivity extends BaseActivity implements TestRecyclerAdapter.OnChildClickListener {
     @BindView(R.id.recycler)
     RecyclerView recycler;
-    private RecyclerAdapter recyclerAdapter;
+    private TestRecyclerAdapter testRecyclerAdapter;
     private List<String> list;
 
     @Override
@@ -36,7 +36,7 @@ public class RecyclerViewActivity extends BaseActivity implements RecyclerAdapte
 
     @Override
     public void initView() {
-        recyclerAdapter = new RecyclerAdapter(this, list);
+        testRecyclerAdapter = new TestRecyclerAdapter(this, list);
 
         // 线性布局
         // LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
@@ -61,8 +61,8 @@ public class RecyclerViewActivity extends BaseActivity implements RecyclerAdapte
         StaggeredGridLayoutManager staggeredGridLayoutManager = new StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL);
 
         recycler.setLayoutManager(staggeredGridLayoutManager);
-        recycler.setAdapter(recyclerAdapter);
-        recyclerAdapter.setOnChildClickListener(this);
+        recycler.setAdapter(testRecyclerAdapter);
+        testRecyclerAdapter.setOnChildClickListener(this);
     }
 
     @Override
