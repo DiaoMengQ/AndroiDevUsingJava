@@ -131,12 +131,14 @@ public class MainActivity extends BaseActivity {
             case R.id.btn_stopBackService:
                 Toast.makeText(mContext, "停止服务", Toast.LENGTH_SHORT).show();
                 // 发送停止服务广播
-                Intent intent2stopServ = new Intent(this, BackService.class);
+                Intent intent2stopServ = new Intent();
                 intent2stopServ.setAction(getString(R.string.action_stopBackService));
                 // intent2stopServ.putExtra("cmd", CMD_STOP_SERVICE);
-                // sendBroadcast(intent2stopServ);
+                // TODO: 发送广播不成功
+                sendBroadcast(intent2stopServ);
                 // TODO: 问题:停止服务后线程仍继续运行
-                stopService(intent2stopServ);
+                // Intent intent2stopServ = new Intent(this, BackService.class);
+                // stopService(intent2stopServ);
                 break;
             case R.id.btn_unBindBackService:
                 Toast.makeText(mContext, "解绑服务", Toast.LENGTH_SHORT).show();

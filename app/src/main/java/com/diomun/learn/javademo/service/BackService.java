@@ -55,9 +55,9 @@ public class BackService extends BaseService {
     }
 
     private void startTask() {
-        // IntentFilter intentFilter = new IntentFilter();
-        // intentFilter.addAction(getString(R.string.action_stopBackService));
-        // registerReceiver(cmdReceiver, intentFilter);
+        IntentFilter intentFilter = new IntentFilter();
+        intentFilter.addAction(getString(R.string.action_stopBackService));
+        registerReceiver(cmdReceiver, intentFilter);
 
         // 线程工厂，可以对每个线程进行单独处理，如设定线程的标识符
         final ThreadFactory ScheduledTF = r -> {
@@ -75,6 +75,7 @@ public class BackService extends BaseService {
     private class CommandReceiver extends BroadcastReceiver {
         @Override
         public void onReceive(Context context, Intent intent) {
+            Log.d(TAG, "onReceive: 广播收到 收到");
             int cmd = intent.getIntExtra("cmd", -1);
             Log.d(TAG, "onReceive: 接收广播参数" + cmd);
             if (cmd == MainActivity.CMD_STOP_SERVICE) { //如果等于0
@@ -88,8 +89,10 @@ public class BackService extends BaseService {
     public void onDestroy() {
         super.onDestroy();
         // 因为是服务开启的广播，所以当服务被关闭时同时清除广播
-        // unregisterReceiver(cmdReceiver);
-        // Log.d(TAG, "onDestroy: 清除广播注册");
+        Log.d(TAG, "onDestroy: 清除广播注册");
+        unregisterReceiver(cmdReceiver);
+        // System.exit(0); // 会把整个线程都停止掉
+
     }
 
 }
