@@ -22,7 +22,8 @@
             android:text="@string/ic_back"
             android:textSize="@dimen/size_ic_back"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            android:textColor="#464646"/>
     </androidx.appcompat.widget.LinearLayoutCompat>
 
     <LinearLayout
