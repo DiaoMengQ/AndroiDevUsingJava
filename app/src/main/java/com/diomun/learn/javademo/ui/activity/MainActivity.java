@@ -15,7 +15,6 @@ import android.widget.Toast;
 
 import com.diomun.learn.javademo.R;
 import com.diomun.learn.javademo.base.BaseActivity;
-import com.diomun.learn.javademo.base.BaseService;
 import com.diomun.learn.javademo.service.BackService;
 
 import java.util.List;
