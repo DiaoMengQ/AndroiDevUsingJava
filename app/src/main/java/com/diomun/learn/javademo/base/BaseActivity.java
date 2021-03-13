@@ -177,7 +177,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     /**
      * 初始化转圈圈
      */
-    private void initLoading() {
+    public void initLoading() {
         AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
         mDialogLoading = builder.create();
         mDialogLoading.setCanceledOnTouchOutside(false);

@@ -51,6 +51,8 @@ public class MainActivity extends BaseActivity {
     Button btnToRecycleView;
     @BindView(R.id.btn_register)
     Button btnRegister;
+    @BindView(R.id.btn_asyncTask)
+    Button btnAsyncTask;
 
     private Intent intent2backServ;
     private ServiceConnection servConn;
@@ -97,9 +99,14 @@ public class MainActivity extends BaseActivity {
             R.id.btn_toRecycleView,
             R.id.btn_musicSearch,
             R.id.btn_login,
-            R.id.btn_register})
+            R.id.btn_register,
+            R.id.btn_asyncTask})
     public void onViewClicked(View view) {
         switch (view.getId()) {
+            case R.id.btn_asyncTask:
+                Intent intent2ImgLoad = new Intent(this, ImgLoadActivity.class);
+                startActivity(intent2ImgLoad);
+                break;
             case R.id.btn_register:
                 Intent intent2register = new Intent(this, RegisterActivity.class);
                 startActivity(intent2register);

@@ -124,7 +124,7 @@
                 <Button
                     android:id="@+id/btn_asyncTask"
                     style="@style/MyButtonStyle"
-                    android:text="AsyncTask"/>
+                    android:text="AsyncTask加载图片"/>
             </LinearLayout>
         </LinearLayout>
 
