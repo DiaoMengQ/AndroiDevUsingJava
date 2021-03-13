@@ -33,8 +33,9 @@
     </style>
     <!-- END Custom View Test -->
 
+    <!-- Linear Edit Text -->
     <declare-styleable name="lineEdittext">
-        <attr name="drawableFocus" format="reference"/>
+        <attr name="drawableFocus" format="reference" />
         <attr name="drawableUnFocus" format="reference" />
         <attr name="drawableError" format="reference" />
     </declare-styleable>
@@ -44,4 +45,17 @@
         <item name="drawableUnFocus">@drawable/user</item>
         <item name="drawableError">@drawable/user_error</item>
     </style>
+    <!-- END Linear Edit Text -->
+
+    <!-- Button Style -->
+    <style name="MyButtonStyle">
+        <item name="android:layout_height">@dimen/height_btn</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_margin">@dimen/margin_btn</item>
+        <item name="background">@color/greyBlue</item>
+        <item name="android:textColor">#333</item>
+    </style>
+    <!-- END Button Style -->
+
 </resources>

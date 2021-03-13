@@ -29,18 +29,12 @@
 
                 <Button
                     android:id="@+id/btn_toListView"
-                    android:layout_width="0dp"
-                    android:layout_height="@dimen/height4btn"
-                    android:layout_margin="@dimen/margin_btn"
-                    android:layout_weight="1"
+                    style="@style/MyButtonStyle"
                     android:text="ListVIEW" />
 
                 <Button
                     android:id="@+id/btn_database"
-                    android:layout_width="0dp"
-                    android:layout_height="@dimen/height4btn"
-                    android:layout_margin="@dimen/margin_btn"
-                    android:layout_weight="1"
+                    style="@style/MyButtonStyle"
                     android:clickable="false"
                     android:text="数据库（未完成）" />
 
@@ -53,18 +47,12 @@
 
                 <Button
                     android:id="@+id/btn_login"
-                    android:layout_width="0dp"
-                    android:layout_height="@dimen/height4btn"
-                    android:layout_margin="@dimen/margin_btn"
-                    android:layout_weight="1"
+                    style="@style/MyButtonStyle"
                     android:text="登录界面" />
 
                 <Button
                     android:id="@+id/btn_register"
-                    android:layout_width="0dp"
-                    android:layout_height="@dimen/height4btn"
-                    android:layout_margin="@dimen/margin_btn"
-                    android:layout_weight="1"
+                    style="@style/MyButtonStyle"
                     android:text="注册界面" />
             </LinearLayout>
 
@@ -75,26 +63,17 @@
 
                 <Button
                     android:id="@+id/btn_startBackService"
-                    android:layout_width="0dp"
-                    android:layout_height="@dimen/height4btn"
-                    android:layout_margin="@dimen/margin_btn"
-                    android:layout_weight="1"
+                    style="@style/MyButtonStyle"
                     android:text="启动服务" />
 
                 <Button
                     android:id="@+id/btn_unBindBackService"
-                    android:layout_width="0dp"
-                    android:layout_height="@dimen/height4btn"
-                    android:layout_margin="@dimen/margin_btn"
-                    android:layout_weight="1"
+                    style="@style/MyButtonStyle"
                     android:text="解绑服务" />
 
                 <Button
                     android:id="@+id/btn_stopBackService"
-                    android:layout_width="0dp"
-                    android:layout_height="@dimen/height4btn"
-                    android:layout_margin="@dimen/margin_btn"
-                    android:layout_weight="1"
+                    style="@style/MyButtonStyle"
                     android:text="停止服务（未完成）" />
 
             </LinearLayout>
@@ -106,10 +85,7 @@
 
                 <Button
                     android:id="@+id/btn_viewBackService"
-                    android:layout_width="0dp"
-                    android:layout_height="@dimen/height4btn"
-                    android:layout_margin="@dimen/margin_btn"
-                    android:layout_weight="1"
+                    style="@style/MyButtonStyle"
                     android:text="查看服务状态（未完成）" />
             </LinearLayout>
 
@@ -119,10 +95,7 @@
 
                 <Button
                     android:id="@+id/btn_toRecycleView"
-                    android:layout_width="0dp"
-                    android:layout_height="@dimen/height4btn"
-                    android:layout_margin="@dimen/margin_btn"
-                    android:layout_weight="1"
+                    style="@style/MyButtonStyle"
                     android:text="RecycleView 瀑布流" />
             </LinearLayout>
 
@@ -133,20 +106,28 @@
 
                 <Button
                     android:id="@+id/btn_musicSearch"
-                    android:layout_width="0dp"
-                    android:layout_height="@dimen/height4btn"
-                    android:layout_margin="@dimen/margin_btn"
-                    android:layout_weight="1"
+                    style="@style/MyButtonStyle"
                     android:text="音乐搜索" />
             </LinearLayout>
 
             <TextView
                 android:id="@+id/tv_test"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                style="@style/MyButtonStyle"
                 android:text="TextView"
                 android:visibility="gone" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/btn_asyncTask"
+                    style="@style/MyButtonStyle"
+                    android:text="AsyncTask"/>
+            </LinearLayout>
         </LinearLayout>
+
     </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

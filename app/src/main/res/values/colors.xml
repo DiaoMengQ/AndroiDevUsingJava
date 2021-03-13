@@ -125,6 +125,7 @@
     <color name="navy">#000080</color><!--海军色 -->
     <color name="royalblue">#4169e1</color><!--皇家蓝 -->
     <color name="azure">#f0ffff</color><!--天蓝色 -->
+    <color name="greyBlue">#BFDCEA</color><!-- 浅灰蓝色 -->
     <color name="skyblue">#87ceeb</color><!--天蓝色 -->
     <color name="deepskyblue">#00bfff</color><!--深天蓝色 -->
     <color name="lightskyblue">#87cefa</color><!--亮天蓝色 -->

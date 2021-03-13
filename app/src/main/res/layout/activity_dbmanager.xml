@@ -23,9 +23,9 @@
 
             <Button
                 android:id="@+id/btn_createDB"
-                android:layout_width="@dimen/width4btn"
-                android:layout_height="@dimen/height4btn"
-                android:padding="@dimen/padding4button"
+                android:layout_width="@dimen/width_btn"
+                android:layout_height="@dimen/height_btn"
+                android:padding="@dimen/padding_button"
                 android:text="创建数据库" />
 
             <Space
@@ -35,9 +35,9 @@
 
             <Button
                 android:id="@+id/btn_dataList"
-                android:layout_width="@dimen/width4btn"
-                android:layout_height="@dimen/height4btn"
-                android:padding="@dimen/padding4button"
+                android:layout_width="@dimen/width_btn"
+                android:layout_height="@dimen/height_btn"
+                android:padding="@dimen/padding_button"
                 android:text="查看所有数据" />
 
         </LinearLayout>

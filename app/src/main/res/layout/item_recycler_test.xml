@@ -10,7 +10,7 @@
         android:layout_height="wrap_content"
         android:background="@drawable/btn_normal"
         android:gravity="center"
-        android:padding="@dimen/padding4button"
+        android:padding="@dimen/padding_button"
         android:textColor="#fff" />
 
 </LinearLayout>
