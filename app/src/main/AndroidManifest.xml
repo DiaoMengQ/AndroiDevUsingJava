@@ -32,7 +32,7 @@
         <activity android:name="com.diomun.learn.javademo.ui.activity.SplashActivity" />
 
         <!-- 注册页 -->
-        <activity android:name=".ui.activity.RegisterActivity"></activity>
+        <activity android:name=".ui.activity.RegisterActivity" />
 
         <!-- 数据库管理页 -->
         <activity
@@ -58,13 +58,23 @@
             android:launchMode="singleTask" />
 
         <!--    后台服务   -->
-        <service android:name=".service.BackService"
+        <service
+            android:name=".service.BackService"
             android:permission="android.permission.WAKE_LOCK">
-<!--            <intent-filter>-->
-<!--                <action android:name="SIMPLE.SERVICE.BACKSERVICE"/>-->
-<!--            </intent-filter>-->
+            <!--            <intent-filter>-->
+            <!--                <action android:name="SIMPLE.SERVICE.BACKSERVICE"/>-->
+            <!--            </intent-filter>-->
         </service>
 
+        <!--    广播接收器（可在此配置文件注册，也可在代码中动态注册）    -->
+<!--        <receiver-->
+<!--            android:name=".receiver.CommandReceiver"-->
+<!--            android:enabled="true"-->
+<!--            android:exported="true">-->
+<!--            <intent-filter>-->
+<!--                <action android:name="myBroadCast" />-->
+<!--            </intent-filter>-->
+<!--        </receiver>-->
     </application>
 
 </manifest>

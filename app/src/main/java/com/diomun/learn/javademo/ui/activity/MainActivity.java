@@ -133,8 +133,7 @@ public class MainActivity extends BaseActivity {
                 // 发送停止服务广播
                 Intent intent2stopServ = new Intent();
                 intent2stopServ.setAction(getString(R.string.action_stopBackService));
-                // intent2stopServ.putExtra("cmd", CMD_STOP_SERVICE);
-                // TODO: 发送广播不成功
+                intent2stopServ.putExtra("cmd", CMD_STOP_SERVICE);
                 sendBroadcast(intent2stopServ);
                 // TODO: 问题:停止服务后线程仍继续运行
                 // Intent intent2stopServ = new Intent(this, BackService.class);

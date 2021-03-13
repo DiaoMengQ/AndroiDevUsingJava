@@ -68,16 +68,15 @@ public class BackService extends BaseService {
         ScheduledExecutorService singleThreadScheduledExecutor = new ScheduledThreadPoolExecutor(1, ScheduledTF);
         singleThreadScheduledExecutor.scheduleWithFixedDelay(() ->
                 Log.e(TAG, "run: 定时任务" + MyTimeUtils.getSystemTime()), 1, 3, TimeUnit.SECONDS);
-
     }
 
     // 接收广播
     private class CommandReceiver extends BroadcastReceiver {
         @Override
         public void onReceive(Context context, Intent intent) {
-            Log.d(TAG, "onReceive: 广播收到 收到");
+            Log.d(TAG, "onReceive: ------------- 收到 收到！");
             int cmd = intent.getIntExtra("cmd", -1);
-            Log.d(TAG, "onReceive: 接收广播参数" + cmd);
+            Log.d(TAG, "onReceive: 接收广播参数 " + cmd);
             if (cmd == MainActivity.CMD_STOP_SERVICE) { //如果等于0
                 // TODO: 问题:停止服务后线程仍继续运行
                 stopSelf(); // 停止服务
