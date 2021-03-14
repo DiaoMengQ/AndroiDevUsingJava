@@ -9,11 +9,13 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.ImageView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.badoo.mobile.util.WeakHandler;
+import com.bumptech.glide.Glide;
 import com.diomun.learn.javademo.R;
 import com.diomun.learn.javademo.ui.activity.MainActivity;
 
@@ -25,7 +27,7 @@ import cat.ereza.customactivityoncrash.config.CaocConfig;
 
 /**
  * Activity 基本类，设定通用方法
- *
+ * <p>
  * Author: DiaoMengQi
  * Email: dmq1212@qq.com
  * created on 2021/1/19
@@ -190,10 +192,12 @@ public abstract class BaseActivity extends AppCompatActivity {
         if (mDialogLoading != null && !mDialogLoading.isShowing()) {
             mDialogLoading.show();
             @SuppressLint("InflateParams") View view = LayoutInflater.from(mContext).inflate(R.layout.dialog_progress, null);
+            ImageView ivLoading = view.findViewById(R.id.iv_loading);
             mDialogLoading.setContentView(view);
             Objects.requireNonNull(mDialogLoading.getWindow()).setLayout(WindowManager.LayoutParams.WRAP_CONTENT, WindowManager.LayoutParams.WRAP_CONTENT);
             mDialogLoading.getWindow().getDecorView().setBackgroundColor(0x00000000);
             mDialogLoading.getWindow().getDecorView().setPadding(0, 0, 0, 0);
+            Glide.with(mContext).load(R.drawable.loading).into(ivLoading);
         }
     }
 
