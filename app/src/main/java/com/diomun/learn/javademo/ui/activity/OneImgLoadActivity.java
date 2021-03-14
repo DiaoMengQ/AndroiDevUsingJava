@@ -1,6 +1,7 @@
 package com.diomun.learn.javademo.ui.activity;
 
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.util.Log;
 
@@ -9,6 +10,12 @@ import androidx.appcompat.widget.AppCompatImageView;
 import com.diomun.learn.javademo.R;
 import com.diomun.learn.javademo.base.BaseActivity;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.lang.ref.WeakReference;
+import java.net.URL;
+import java.net.URLConnection;
+
 import butterknife.BindView;
 
 /**
@@ -16,9 +23,10 @@ import butterknife.BindView;
  * @date created on 2021/3/13
  * @desc 图片加载页
  */
-public class ImgLoadActivity extends BaseActivity {
+public class OneImgLoadActivity extends BaseActivity {
     @BindView(R.id.iv_netLoad)
     AppCompatImageView ivNetLoad;
+    private MyAsyncTask myAsyncTask;
 
     private String imgUrl = "https://c-ssl.duitang.com/uploads/item/201708/04/20170804085229_Z4Y2a.jpeg";
 
@@ -29,15 +37,38 @@ public class ImgLoadActivity extends BaseActivity {
 
     @Override
     public void initView() {
-        initLoading();
     }
 
     @Override
     public void initData() {
-        new MyAsyncTask().execute(imgUrl);
+        myAsyncTask = new MyAsyncTask(this);
+        myAsyncTask.execute(imgUrl);
     }
 
-    class MyAsyncTask extends AsyncTask<String, Void, Bitmap> {
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        // 在销毁当前Activity的时候手动去调用AsyncTask的cancle() 防止内存泄漏
+        myAsyncTask.cancel(true);
+    }
+
+    /**
+     * 将 AsyncTask 设为 static，防止开启线程后，未结束时用户又一次、甚至多次开启线程，导致多次请求。
+     */
+    static class MyAsyncTask extends AsyncTask<Object, Object, Bitmap> {
+        private String TAG = "OneImgLoad MyAsyncTask";
+
+        /**
+         * 由于AsyncTask的实例拥有 activity 的引用,
+         * 所以当activity销毁时, activity所持有的资源不会立即释放,造成内存泄露
+         * 因此在该类中使用 Activity 的弱引用
+         */
+        private WeakReference activityWR;
+
+        MyAsyncTask(OneImgLoadActivity mActivity) {
+            this.activityWR = new WeakReference<>(mActivity);
+        }
+
         /**
          * 第一个执行的方法
          * 执行时机：在执行实际的后台操作前，被UI 线程调用
@@ -49,20 +80,37 @@ public class ImgLoadActivity extends BaseActivity {
         protected void onPreExecute() {
             super.onPreExecute();
             Log.d(TAG, "onPreExecute: 准备工作，等待动画");
-            showLoading();
+            OneImgLoadActivity mActivity = (OneImgLoadActivity) activityWR.get();
+            mActivity.initLoading();
+            mActivity.showLoading();
         }
+
 
         /**
          * 执行时机：在onPreExecute 方法执行后马上执行，该方法运行在后台线程中
          * 作用：主要负责执行那些很耗时的后台处理工作。可以调用 publishProgress方法来更新实时的任务进度。该方法是抽象方法，子类必须实现。
          *
-         * @param strings
-         * @return
+         * @param objects
+         * @return Bitmap
          * @see android.os.AsyncTask#doInBackground(Object[])
          */
         @Override
-        protected Bitmap doInBackground(String... strings) {
-            return null;
+        protected Bitmap doInBackground(Object... objects) {
+            Bitmap bitmap = null;
+            try {
+                Thread.sleep(3000); // 等 3s 看转圈圈
+                URL url = new URL((String) objects[0]);
+                URLConnection urlConnection = url.openConnection();
+                urlConnection.setConnectTimeout(4000);
+                urlConnection.connect();
+
+                InputStream inputStream = urlConnection.getInputStream();
+                bitmap = BitmapFactory.decodeStream(inputStream);
+                inputStream.close();
+            } catch (IOException | InterruptedException e) {
+                e.printStackTrace();
+            }
+            return bitmap;
         }
 
         /**
@@ -72,7 +120,7 @@ public class ImgLoadActivity extends BaseActivity {
          * @see android.os.AsyncTask#onProgressUpdate(Object[])
          */
         @Override
-        protected void onProgressUpdate(Void... values) {
+        protected void onProgressUpdate(Object... values) {
             super.onProgressUpdate(values);
         }
 
@@ -86,7 +134,9 @@ public class ImgLoadActivity extends BaseActivity {
         @Override
         protected void onPostExecute(Bitmap bitmap) {
             super.onPostExecute(bitmap);
-
+            OneImgLoadActivity mActivity = (OneImgLoadActivity) activityWR.get();
+            mActivity.ivNetLoad.setImageBitmap(bitmap);
+            mActivity.hideLoading();
         }
     }
 }

@@ -104,7 +104,7 @@ public class MainActivity extends BaseActivity {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.btn_asyncTask:
-                Intent intent2ImgLoad = new Intent(this, ImgLoadActivity.class);
+                Intent intent2ImgLoad = new Intent(this, OneImgLoadActivity.class);
                 startActivity(intent2ImgLoad);
                 break;
             case R.id.btn_register:

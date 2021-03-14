@@ -56,7 +56,7 @@
         <activity
             android:name=".ui.activity.MusicSearchActivity"
             android:launchMode="singleTask" />
-        <activity android:name=".ui.activity.ImgLoadActivity" />
+        <activity android:name=".ui.activity.OneImgLoadActivity" />
 
         <!--    后台服务   -->
         <service
